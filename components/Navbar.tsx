@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         >
           <div className="w-12 h-12 relative overflow-hidden rounded-lg bg-white shadow-sm flex items-center justify-center border border-slate-100">
              <img 
-               src="https://media.licdn.com/dms/image/v2/D4D0BAQE_zcen4e1pdw/company-logo_200_200/company-logo_200_200/0/1733242155924/acteo_management_logo?e=1768435200&v=beta&t=0mqmLGc-EQJ06qTLhmE2C9en3IXRwjLtDRZIfAqm-io" 
+               src="/logo-acteo.png"
                alt="Acteo Management Logo" 
                className="w-full h-full object-cover"
              />

@@ -23,7 +23,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 relative overflow-hidden rounded bg-white flex items-center justify-center">
                     <img 
-                    src="https://media.licdn.com/dms/image/v2/D4D0BAQE_zcen4e1pdw/company-logo_200_200/company-logo_200_200/0/1733242155924/acteo_management_logo?e=1768435200&v=beta&t=0mqmLGc-EQJ06qTLhmE2C9en3IXRwjLtDRZIfAqm-io" 
+                    src="/logo-acteo.png"
                     alt="Acteo Logo" 
                     className="w-full h-full object-cover"
                     />
