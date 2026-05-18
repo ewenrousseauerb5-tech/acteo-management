@@ -6,11 +6,22 @@ import Services from './components/Services';
 import Quote from './components/Quote';
 import Approach from './components/Approach';
 import About from './components/About';
+import LinkedInDashboard from './components/LinkedInDashboard';
 import Footer from './components/Footer';
+import { Page } from './types';
 
 function App() {
-  // Simple state routing: 'home' | 'about'
-  const [currentPage, setCurrentPage] = useState<'home' | 'about'>('home');
+  const getInitialPage = (): Page => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('view') === 'linkedin' || window.location.hash === '#linkedin-insights') {
+        return 'linkedin';
+      }
+    }
+    return 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState<Page>(getInitialPage);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -25,8 +36,10 @@ function App() {
             <Quote />
             <Approach />
           </>
-        ) : (
+        ) : currentPage === 'about' ? (
           <About />
+        ) : (
+          <LinkedInDashboard />
         )}
       </main>
       

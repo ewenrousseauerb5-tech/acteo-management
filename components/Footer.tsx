@@ -1,13 +1,14 @@
 import React from 'react';
 import { Linkedin, Mail, MapPin } from 'lucide-react';
+import { Page } from '../types';
 
 interface FooterProps {
-  onNavigate: (page: 'home' | 'about') => void;
+  onNavigate: (page: Page) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   
-  const handleNavClick = (page: 'home' | 'about', e: React.MouseEvent) => {
+  const handleNavClick = (page: Page, e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
     window.scrollTo(0, 0);

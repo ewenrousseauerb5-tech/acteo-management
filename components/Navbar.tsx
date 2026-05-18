@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Page } from '../types';
 
 interface NavbarProps {
-  currentPage: 'home' | 'about';
-  onNavigate: (page: 'home' | 'about') => void;
+  currentPage: Page;
+  onNavigate: (page: Page) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
@@ -18,10 +19,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Force black text on Navbar if we are on the About page (since it has a white background, not an image hero)
-  const isDarkText = isScrolled || currentPage === 'about';
+  const isDarkText = isScrolled || currentPage === 'about' || currentPage === 'linkedin';
 
-  const handleNavClick = (page: 'home' | 'about', e: React.MouseEvent) => {
+  const handleNavClick = (page: Page, e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(page);
     setIsOpen(false);

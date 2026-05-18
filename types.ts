@@ -16,3 +16,5 @@ export interface NavLink {
   label: string;
   href: string;
 }
+
+export type Page = 'home' | 'about' | 'linkedin';
