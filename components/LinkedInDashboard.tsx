@@ -139,6 +139,13 @@ const dayRecommendations = [
   },
 ];
 
+const keyStats = [
+  { label: 'Posts analysés', value: '20', detail: 'Janvier à mai 2026' },
+  { label: 'Meilleure portée', value: '2 548', detail: "ISO 45001 + L'Usine Nouvelle" },
+  { label: 'Plus d’engagement', value: '61,54 %', detail: 'Carrousel ISO 14001' },
+  { label: 'Plus commenté', value: '24', detail: 'Certification ISO 27001' },
+];
+
 const AccessGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -232,6 +239,18 @@ const LinkedInDashboard: React.FC = () => {
               La règle est simple : publier moins d’idées isolées et plus de preuves réelles. Les meilleurs posts montrent une autorité, des personnes et des situations concrètes.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-white border-b border-slate-200">
+        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {keyStats.map((stat) => (
+            <div key={stat.label} className="border border-slate-200 rounded-lg p-5">
+              <div className="text-sm font-semibold text-slate-500 mb-3">{stat.label}</div>
+              <div className="text-3xl font-bold text-slate-950">{stat.value}</div>
+              <div className="text-sm text-slate-500 mt-2">{stat.detail}</div>
+            </div>
+          ))}
         </div>
       </section>
 
