@@ -142,7 +142,7 @@ const dayRecommendations = [
 const keyStats = [
   { label: 'Posts analysés', value: '20', detail: 'Janvier à mai 2026' },
   { label: 'Meilleure portée', value: '2 548', detail: "ISO 45001 + L'Usine Nouvelle" },
-  { label: 'Plus d’engagement', value: '61,54 %', detail: 'Carrousel ISO 14001' },
+  { label: 'Posts à preuve forte', value: '4', detail: 'Presse, certifications, événement' },
   { label: 'Plus commenté', value: '24', detail: 'Certification ISO 27001' },
 ];
 
