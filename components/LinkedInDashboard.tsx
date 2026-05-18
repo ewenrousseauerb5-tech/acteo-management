@@ -293,7 +293,7 @@ const avoid = [
 
 const formatNumber = (value: number) => value.toLocaleString('fr-FR');
 const formatPercent = (value: number) => `${value.toFixed(2).replace('.', ',')} %`;
-const DASHBOARD_PASSWORD = 'acteo-linkedin-2026';
+const DASHBOARD_PASSWORD = 'insights';
 const DASHBOARD_SESSION_KEY = 'acteo-linkedin-dashboard-access';
 
 const Stat: React.FC<{ icon: React.ElementType; label: string; value: string; note: string }> = ({ icon: Icon, label, value, note }) => (
