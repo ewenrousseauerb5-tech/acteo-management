@@ -198,6 +198,46 @@ function App() {
                 <span>France · Espagne · International</span>
               </div>
             </div>
+
+            <div className="hero-motion" aria-label="Methode Acteo: comprendre, aligner, decider et ancrer">
+              <div className="motion-heading">
+                <span>Methode Acteo</span>
+                <strong>De la complexite a l action</strong>
+              </div>
+              <div className="motion-flow">
+                <span className="motion-track" aria-hidden="true">
+                  <i />
+                </span>
+                <div className="motion-step motion-step-one">
+                  <b>01</b>
+                  <div>
+                    <strong>Comprendre</strong>
+                    <span>Terrain · enjeux · parties prenantes</span>
+                  </div>
+                </div>
+                <div className="motion-step motion-step-two">
+                  <b>02</b>
+                  <div>
+                    <strong>Aligner</strong>
+                    <span>Vision · roles · priorites</span>
+                  </div>
+                </div>
+                <div className="motion-step motion-step-three">
+                  <b>03</b>
+                  <div>
+                    <strong>Decider</strong>
+                    <span>Arbitrages · plan · engagement</span>
+                  </div>
+                </div>
+                <div className="motion-step motion-step-four">
+                  <b>04</b>
+                  <div>
+                    <strong>Ancrer</strong>
+                    <span>Rituels · mesure · autonomie</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
