@@ -236,7 +236,8 @@ button.primary-action {
 .hero-section {
   position: relative;
   display: flex;
-  min-height: 88vh;
+  min-height: 100vh;
+  min-height: 100svh;
   padding: 108px clamp(18px, 5vw, 72px) 42px;
   color: var(--white);
   background: #08131e;
@@ -305,7 +306,7 @@ button.primary-action {
 .hero-portrait img {
   display: block;
   width: 100%;
-  height: min(680px, calc(88vh - 130px));
+  height: min(720px, calc(100svh - 150px));
   min-height: 500px;
   object-fit: cover;
   object-position: center 42%;
@@ -418,7 +419,7 @@ button.primary-action {
   grid-template-columns: 38px 1fr;
   gap: 12px;
   align-items: center;
-  min-height: 76px;
+  min-height: 105px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   opacity: 0.44;
   transform: translateX(0);
@@ -511,8 +512,8 @@ button.primary-action {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .review-card,
@@ -526,10 +527,11 @@ button.primary-action {
 
 .service-card {
   display: flex;
-  min-height: 360px;
+  min-height: 430px;
   flex-direction: column;
-  padding: clamp(24px, 3.4vw, 42px);
+  padding: clamp(22px, 2.2vw, 30px);
   color: var(--white);
+  border-radius: 6px;
   background: var(--ink);
 }
 
@@ -666,7 +668,7 @@ button.primary-action {
 
 .course-list > div {
   position: relative;
-  min-height: 210px;
+  min-height: 180px;
   padding: 28px;
   color: var(--white);
   border-color: transparent;
@@ -702,44 +704,61 @@ button.primary-action {
   line-height: 1.62;
 }
 
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
+.reviews-carousel {
   border-top: 1px solid rgba(15, 31, 48, 0.12);
+  border-bottom: 1px solid rgba(15, 31, 48, 0.12);
+}
+
+.reviews-viewport {
+  overflow: hidden;
+}
+
+.reviews-track {
+  display: flex;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .review-card {
-  display: flex;
-  min-height: 280px;
-  flex-direction: column;
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) minmax(220px, 0.42fr);
+  align-items: start;
+  gap: clamp(20px, 4vw, 64px);
+  min-width: 100%;
+  min-height: 310px;
   margin: 0;
-  padding: 28px clamp(20px, 3vw, 40px);
+  padding: clamp(34px, 5vw, 64px) 0;
   border: 0;
-  border-right: 1px solid rgba(15, 31, 48, 0.12);
   border-radius: 0;
   box-shadow: none;
 }
 
-.review-card:last-child {
-  border-right: 0;
+.review-number {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .review-card svg {
   color: var(--green);
 }
 
+.review-quote {
+  display: grid;
+  gap: 28px;
+}
+
 .review-card blockquote {
-  margin: 24px 0;
+  margin: 0;
   color: var(--ink);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: clamp(1.35rem, 2.5vw, 2.25rem);
+  line-height: 1.35;
 }
 
 .review-card figcaption {
   display: grid;
   gap: 5px;
-  margin-top: auto;
+  padding-top: 6px;
 }
 
 .review-card strong {
@@ -750,6 +769,53 @@ button.primary-action {
   color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.45;
+}
+
+.review-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.review-dots,
+.review-arrows {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-dots button {
+  width: 28px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  background: rgba(15, 31, 48, 0.18);
+  cursor: pointer;
+  transition: width 180ms ease, background 180ms ease;
+}
+
+.review-dots button.is-active {
+  width: 48px;
+  background: var(--green);
+}
+
+.review-arrows button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: var(--ink);
+  border: 1px solid rgba(15, 31, 48, 0.16);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.review-arrows button:hover {
+  color: var(--white);
+  background: var(--ink);
 }
 
 .about-block {
@@ -1187,15 +1253,14 @@ footer.site-footer {
     grid-template-columns: 1fr;
   }
 
-  .reviews-grid {
-    border-top: 0;
+  .review-card {
+    grid-template-columns: 32px minmax(0, 1fr);
+    min-height: auto;
+    gap: 18px;
   }
 
-  .review-card,
-  .review-card:last-child {
-    min-height: auto;
-    border-right: 0;
-    border-top: 1px solid rgba(15, 31, 48, 0.12);
+  .review-card figcaption {
+    grid-column: 2;
   }
 
   .service-card,

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   ArrowUpRight,
+  ArrowLeft,
+  ArrowRight,
   BarChart3,
   BrainCircuit,
   CalendarDays,
@@ -109,6 +111,7 @@ function App() {
   const [newsletterOpen, setNewsletterOpen] = useState(false);
   const [newsletterSent, setNewsletterSent] = useState(false);
   const [courseStep, setCourseStep] = useState(0);
+  const [activeReview, setActiveReview] = useState(0);
 
   useEffect(() => {
     if (currentPage !== 'home') return;
@@ -140,7 +143,9 @@ function App() {
       const start = section.offsetTop - 120;
       const end = Math.max(start + 1, section.offsetTop + section.offsetHeight - window.innerHeight + 120);
       const progress = Math.min(1, Math.max(0, (window.scrollY - start) / Math.max(1, end - start)));
-      section.style.setProperty('--motion-offset', `${progress * 228}px`);
+      const track = section.querySelector<HTMLElement>('.motion-track');
+      const maxOffset = Math.max(0, (track?.clientHeight ?? 276) - 48);
+      section.style.setProperty('--motion-offset', `${progress * maxOffset}px`);
       setCourseStep(Math.min(3, Math.floor(progress * 4)));
     };
 
@@ -151,6 +156,15 @@ function App() {
       window.removeEventListener('scroll', updateCourseProgress);
       window.removeEventListener('resize', updateCourseProgress);
     };
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (currentPage !== 'home' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(
+      () => setActiveReview((current) => (current + 1) % reviews.length),
+      5200,
+    );
+    return () => window.clearInterval(timer);
   }, [currentPage]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -314,17 +328,57 @@ function App() {
             <span className="section-kicker">Reviews</span>
             <h2>Des dirigeants parlent d impact concret</h2>
           </div>
-          <div className="reviews-grid">
-            {reviews.slice(0, 3).map((review) => (
-              <figure className="review-card" key={review.name}>
-                <MessageSquareQuote aria-hidden="true" size={24} />
-                <blockquote>{review.quote}</blockquote>
-                <figcaption>
-                  <strong>{review.name}</strong>
-                  <span>{review.role}</span>
-                </figcaption>
-              </figure>
-            ))}
+          <div className="reviews-carousel">
+            <div className="reviews-viewport" aria-live="polite">
+              <div
+                className="reviews-track"
+                style={{ transform: `translateX(-${activeReview * 100}%)` }}
+              >
+                {reviews.map((review, index) => (
+                  <figure className="review-card" key={review.name} aria-hidden={activeReview !== index}>
+                    <span className="review-number">0{index + 1}</span>
+                    <div className="review-quote">
+                      <MessageSquareQuote aria-hidden="true" size={28} />
+                      <blockquote>{review.quote}</blockquote>
+                    </div>
+                    <figcaption>
+                      <strong>{review.name}</strong>
+                      <span>{review.role}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+            <div className="review-controls">
+              <div className="review-dots" aria-label="Choisir un temoignage">
+                {reviews.map((review, index) => (
+                  <button
+                    type="button"
+                    className={activeReview === index ? 'is-active' : ''}
+                    onClick={() => setActiveReview(index)}
+                    aria-label={`Temoignage de ${review.name}`}
+                    aria-pressed={activeReview === index}
+                    key={review.name}
+                  />
+                ))}
+              </div>
+              <div className="review-arrows">
+                <button
+                  type="button"
+                  onClick={() => setActiveReview((activeReview - 1 + reviews.length) % reviews.length)}
+                  aria-label="Temoignage precedent"
+                >
+                  <ArrowLeft aria-hidden="true" size={19} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveReview((activeReview + 1) % reviews.length)}
+                  aria-label="Temoignage suivant"
+                >
+                  <ArrowRight aria-hidden="true" size={19} />
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
