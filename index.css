@@ -259,9 +259,8 @@ button.primary-action {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.72fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: clamp(42px, 7vw, 96px);
 }
 
 .signal-row {
@@ -335,10 +334,10 @@ button.primary-action {
   font-size: 0.82rem;
 }
 
-.hero-motion {
+.course-motion {
   width: 100%;
-  max-width: 470px;
-  margin-left: auto;
+  max-width: 480px;
+  margin-top: 34px;
 }
 
 .motion-heading {
@@ -384,7 +383,8 @@ button.primary-action {
   border-radius: 7px;
   background: var(--green-2);
   box-shadow: 0 0 24px rgba(126, 216, 171, 0.5);
-  animation: motion-travel 8s ease-in-out infinite;
+  transform: translateY(var(--motion-offset, 0px));
+  transition: transform 90ms linear;
 }
 
 .motion-step {
@@ -395,7 +395,8 @@ button.primary-action {
   min-height: 76px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   opacity: 0.44;
-  animation: motion-focus 8s ease-in-out infinite;
+  transform: translateX(0);
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
 .motion-step b {
@@ -419,21 +420,9 @@ button.primary-action {
   font-size: 0.82rem;
 }
 
-.motion-step-two { animation-delay: 2s; }
-.motion-step-three { animation-delay: 4s; }
-.motion-step-four { animation-delay: 6s; }
-
-@keyframes motion-travel {
-  0%, 8% { transform: translateY(0); }
-  25%, 33% { transform: translateY(76px); }
-  50%, 58% { transform: translateY(152px); }
-  75%, 83% { transform: translateY(228px); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes motion-focus {
-  0%, 20% { opacity: 1; transform: translateX(6px); }
-  26%, 100% { opacity: 0.44; transform: translateX(0); }
+.motion-step.is-active {
+  opacity: 1;
+  transform: translateX(6px);
 }
 
 .primary-action {
@@ -606,18 +595,20 @@ button.primary-action {
 
 .course-band {
   display: grid;
-  grid-template-columns: 0.78fr 1.22fr;
+  grid-template-columns: 0.92fr 1.08fr;
   gap: clamp(28px, 5vw, 72px);
   align-items: start;
   width: 100%;
   max-width: none;
   padding-inline: max(18px, calc((100vw - 1180px) / 2));
   color: var(--white);
-  background:
-    linear-gradient(135deg, rgba(7, 16, 25, 0.98), rgba(16, 28, 43, 0.95)),
-    linear-gradient(90deg, rgba(50, 199, 214, 0.1) 1px, transparent 1px),
-    var(--ink);
-  background-size: auto, 58px 58px, auto;
+  background: #0b1825;
+}
+
+.course-intro {
+  position: sticky;
+  top: 102px;
+  align-self: start;
 }
 
 .course-band h2,
@@ -631,13 +622,14 @@ button.primary-action {
 
 .course-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
 }
 
 .course-list > div {
   position: relative;
-  padding: 22px;
+  min-height: 210px;
+  padding: 28px;
   color: var(--white);
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
@@ -1093,9 +1085,13 @@ footer.site-footer {
     grid-template-columns: 1fr;
   }
 
-  .hero-motion {
+  .course-intro {
+    position: static;
+  }
+
+  .course-motion {
     max-width: 680px;
-    margin: 16px 0 0;
+    margin-top: 34px;
   }
 }
 
@@ -1159,10 +1155,6 @@ footer.site-footer {
     display: grid;
   }
 
-  .hero-motion {
-    margin-top: 8px;
-  }
-
   .motion-flow {
     padding-left: 28px;
   }
@@ -1181,14 +1173,13 @@ footer.site-footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .motion-track i,
-  .motion-step,
   .newsletter-backdrop,
   .newsletter-modal {
     animation: none;
   }
 
+  .motion-track i,
   .motion-step {
-    opacity: 0.8;
+    transition: none;
   }
 }

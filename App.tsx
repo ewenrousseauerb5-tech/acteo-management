@@ -116,6 +116,7 @@ function App() {
   const [sent, setSent] = useState(false);
   const [newsletterOpen, setNewsletterOpen] = useState(false);
   const [newsletterSent, setNewsletterSent] = useState(false);
+  const [courseStep, setCourseStep] = useState(0);
 
   useEffect(() => {
     if (currentPage !== 'home') return;
@@ -136,6 +137,29 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [newsletterOpen]);
+
+  useEffect(() => {
+    if (currentPage !== 'home') return;
+
+    const updateCourseProgress = () => {
+      const section = document.getElementById('courses');
+      if (!section) return;
+
+      const start = section.offsetTop - 120;
+      const end = Math.max(start + 1, section.offsetTop + section.offsetHeight - window.innerHeight + 120);
+      const progress = Math.min(1, Math.max(0, (window.scrollY - start) / Math.max(1, end - start)));
+      section.style.setProperty('--motion-offset', `${progress * 228}px`);
+      setCourseStep(Math.min(3, Math.floor(progress * 4)));
+    };
+
+    updateCourseProgress();
+    window.addEventListener('scroll', updateCourseProgress, { passive: true });
+    window.addEventListener('resize', updateCourseProgress);
+    return () => {
+      window.removeEventListener('scroll', updateCourseProgress);
+      window.removeEventListener('resize', updateCourseProgress);
+    };
+  }, [currentPage]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -199,45 +223,6 @@ function App() {
               </div>
             </div>
 
-            <div className="hero-motion" aria-label="Methode Acteo: comprendre, aligner, decider et ancrer">
-              <div className="motion-heading">
-                <span>Methode Acteo</span>
-                <strong>De la complexite a l action</strong>
-              </div>
-              <div className="motion-flow">
-                <span className="motion-track" aria-hidden="true">
-                  <i />
-                </span>
-                <div className="motion-step motion-step-one">
-                  <b>01</b>
-                  <div>
-                    <strong>Comprendre</strong>
-                    <span>Terrain · enjeux · parties prenantes</span>
-                  </div>
-                </div>
-                <div className="motion-step motion-step-two">
-                  <b>02</b>
-                  <div>
-                    <strong>Aligner</strong>
-                    <span>Vision · roles · priorites</span>
-                  </div>
-                </div>
-                <div className="motion-step motion-step-three">
-                  <b>03</b>
-                  <div>
-                    <strong>Decider</strong>
-                    <span>Arbitrages · plan · engagement</span>
-                  </div>
-                </div>
-                <div className="motion-step motion-step-four">
-                  <b>04</b>
-                  <div>
-                    <strong>Ancrer</strong>
-                    <span>Rituels · mesure · autonomie</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -282,9 +267,34 @@ function App() {
         </section>
 
         <section id="courses" className="section-block course-band">
-          <div>
+          <div className="course-intro">
             <span className="section-kicker">Cours et formats</span>
             <h2>Des modules courts, intensifs et directement actionnables</h2>
+            <div className="course-motion" aria-label="Methode Acteo: comprendre, aligner, decider et ancrer">
+              <div className="motion-heading">
+                <span>Methode Acteo</span>
+                <strong>De la complexite a l action</strong>
+              </div>
+              <div className="motion-flow">
+                <span className="motion-track" aria-hidden="true">
+                  <i />
+                </span>
+                {[
+                  ['01', 'Comprendre', 'Terrain · enjeux · parties prenantes'],
+                  ['02', 'Aligner', 'Vision · roles · priorites'],
+                  ['03', 'Decider', 'Arbitrages · plan · engagement'],
+                  ['04', 'Ancrer', 'Rituels · mesure · autonomie'],
+                ].map(([number, title, detail], index) => (
+                  <div className={`motion-step ${courseStep === index ? 'is-active' : ''}`} key={number}>
+                    <b>{number}</b>
+                    <div>
+                      <strong>{title}</strong>
+                      <span>{detail}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="course-list">
             <div>
