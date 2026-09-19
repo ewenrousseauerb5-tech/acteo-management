@@ -167,14 +167,13 @@ function App() {
           <div className="hero-grid">
             <div className="hero-copy">
               <div className="signal-row">
-                <span className="signal-dot" />
-                Conseil, coaching et formation pour leaders en mouvement
+                Conseil · Coaching · Formation
               </div>
               <h1>Faire grandir ceux qui portent vos projets</h1>
               <p>
-                Acteo Management aide les dirigeants, managers et equipes projet a transformer
-                les enjeux complexes en decisions claires, pratiques durables et performance
-                mesurable.
+                Nous accompagnons les dirigeants, managers et equipes projet quand la decision
+                devient complexe, que les pratiques doivent evoluer et que le collectif doit
+                retrouver de l elan.
               </p>
               <div className="hero-actions">
                 <button
@@ -194,35 +193,9 @@ function App() {
                 Ou reserver directement un appel de 30 minutes
                 <ArrowUpRight aria-hidden="true" size={15} />
               </a>
-            </div>
-
-            <div className="hero-panel" aria-label="Acteo operating model">
-              <div className="panel-topline">
-                <img src="/logo-acteo.png" alt="Acteo Management" />
-                <span>Executive operating system</span>
-              </div>
-              <div className="metric-grid">
-                <div>
-                  <strong>4</strong>
-                  <span>offres prioritaires</span>
-                </div>
-                <div>
-                  <strong>ISO</strong>
-                  <span>QSE, RSE, processus</span>
-                </div>
-                <div>
-                  <strong>90'</strong>
-                  <span>sessions coaching</span>
-                </div>
-                <div>
-                  <strong>10k+</strong>
-                  <span>problemes resolus</span>
-                </div>
-              </div>
-              <div className="system-lines">
-                <span style={{ width: '88%' }} />
-                <span style={{ width: '64%' }} />
-                <span style={{ width: '74%' }} />
+              <div className="hero-signature">
+                <strong>Laurent Rousseau &amp; Delphine Bessot</strong>
+                <span>France · Espagne · International</span>
               </div>
             </div>
           </div>
@@ -322,7 +295,7 @@ function App() {
 
         <section id="about" className="section-block about-block">
           <div className="about-visual">
-            <img src="/PHOTO-2025-10-20-08-34-27.jpg" alt="Acteo Management workshop" />
+            <img src="/PHOTO-2025-10-20-08-34-51.jpg" alt="Laurent Rousseau et Delphine Bessot" />
           </div>
           <div className="about-copy">
             <span className="section-kicker">A propos</span>
