@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ArrowUpRight,
   BarChart3,
   BrainCircuit,
+  CalendarDays,
   CheckCircle2,
   ChevronRight,
   ClipboardCheck,
   Cpu,
   Gauge,
   GraduationCap,
+  Mail,
   MessageSquareQuote,
   ShieldCheck,
   Sparkles,
   Target,
   UsersRound,
+  X,
 } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -30,6 +33,8 @@ const services = [
       'Pour dirigeants, managers promus et responsables sous pression qui doivent arbitrer vite sans perdre leur posture, leur energie ou leur clarte.',
     icon: BrainCircuit,
     points: ['Seances de 90 minutes', 'Posture, decision, confiance', 'Support entre les sessions'],
+    nextDate: '14 octobre 2026',
+    format: 'Paris + distanciel',
   },
   {
     eyebrow: 'Commercial',
@@ -38,6 +43,8 @@ const services = [
       'Des formats courts pour transformer les interactions client: ecoute active, questions ouvertes, reformulation, pitch et histoire qui reste.',
     icon: MessageSquareQuote,
     points: ['Comites et soutenances', 'Vente consultative', 'Formats equipes 8 a 12 personnes'],
+    nextDate: '6 novembre 2026',
+    format: 'Vigo + intra-entreprise',
   },
   {
     eyebrow: 'Performance',
@@ -46,6 +53,8 @@ const services = [
       'Une approche terrain pour cartographier les flux reels, nommer les pilotes, traiter les non-conformites et piloter les couts de non-qualite.',
     icon: Gauge,
     points: ['ISO 9001 et ISO 14001', '8D, AMDEC, Ishikawa', 'Tableaux de bord utiles'],
+    nextDate: '19 novembre 2026',
+    format: 'Classe virtuelle',
   },
   {
     eyebrow: 'RSE',
@@ -54,6 +63,8 @@ const services = [
       'Diagnostic, feuille de route, formation, indicateurs et preparation aux labels ou certifications pour ancrer la responsabilite dans les pratiques.',
     icon: ShieldCheck,
     points: ['Label Engage RSE AFNOR', 'ISO 26000 et QSE', 'Communication parties prenantes'],
+    nextDate: '3 decembre 2026',
+    format: 'Lyon + distanciel',
   },
 ];
 
@@ -103,10 +114,37 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState<Page>(getInitialPage);
   const [sent, setSent] = useState(false);
+  const [newsletterOpen, setNewsletterOpen] = useState(false);
+  const [newsletterSent, setNewsletterSent] = useState(false);
+
+  useEffect(() => {
+    if (currentPage !== 'home') return;
+    const timer = window.setTimeout(() => setNewsletterOpen(true), 6500);
+    return () => window.clearTimeout(timer);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (!newsletterOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setNewsletterOpen(false);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [newsletterOpen]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSent(true);
+  };
+
+  const handleNewsletterSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setNewsletterSent(true);
   };
 
   if (currentPage === 'linkedin') {
@@ -139,15 +177,23 @@ function App() {
                 mesurable.
               </p>
               <div className="hero-actions">
-                <a href="#contact" className="primary-action">
+                <button
+                  type="button"
+                  className="primary-action"
+                  onClick={() => setNewsletterOpen(true)}
+                >
+                  Recevoir le brief executif
+                  <Mail aria-hidden="true" size={18} />
+                </button>
+                <a href="#contact" className="secondary-action">
                   Demander un diagnostic
                   <ChevronRight aria-hidden="true" size={18} />
                 </a>
-                <a href={bookingUrl} target="_blank" rel="noreferrer" className="secondary-action">
-                  Reserver un appel
-                  <ArrowUpRight aria-hidden="true" size={17} />
-                </a>
               </div>
+              <a href={bookingUrl} target="_blank" rel="noreferrer" className="hero-booking-link">
+                Ou reserver directement un appel de 30 minutes
+                <ArrowUpRight aria-hidden="true" size={15} />
+              </a>
             </div>
 
             <div className="hero-panel" aria-label="Acteo operating model">
@@ -202,6 +248,13 @@ function App() {
                 <span>{service.eyebrow}</span>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
+                <div className="service-date">
+                  <CalendarDays aria-hidden="true" size={17} />
+                  <div>
+                    <strong>Prochaine session</strong>
+                    <span>{service.nextDate} · {service.format}</span>
+                  </div>
+                </div>
                 <ul>
                   {service.points.map((point) => (
                     <li key={point}>
@@ -223,21 +276,25 @@ function App() {
           <div className="course-list">
             <div>
               <GraduationCap aria-hidden="true" />
+              <span className="course-date">14 oct. 2026</span>
               <h3>Leader coach</h3>
               <p>Cadre, feedback, regles d equipe, action sous sept jours.</p>
             </div>
             <div>
               <Target aria-hidden="true" />
+              <span className="course-date">6 nov. 2026</span>
               <h3>L art du questionnement</h3>
               <p>Faire parler le client avant de proposer, passer du besoin technique a l enjeu.</p>
             </div>
             <div>
               <ClipboardCheck aria-hidden="true" />
+              <span className="course-date">19 nov. 2026</span>
               <h3>Audit et processus</h3>
               <p>Audit multi-sites, indicateurs utiles, revue de processus qui decide.</p>
             </div>
             <div>
               <Cpu aria-hidden="true" />
+              <span className="course-date">3 dec. 2026</span>
               <h3>Efficacite avec l IA</h3>
               <p>Cas d usage, prompts, automatisation et methodes pour gagner du temps.</p>
             </div>
@@ -342,6 +399,70 @@ function App() {
       </main>
 
       <Footer onNavigate={setCurrentPage} />
+
+      {newsletterOpen && (
+        <div
+          className="newsletter-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.currentTarget === event.target) setNewsletterOpen(false);
+          }}
+        >
+          <section
+            className="newsletter-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="newsletter-title"
+          >
+            <button
+              type="button"
+              className="newsletter-close"
+              onClick={() => setNewsletterOpen(false)}
+              aria-label="Fermer"
+            >
+              <X aria-hidden="true" size={20} />
+            </button>
+            <div className="newsletter-mark">
+              <Mail aria-hidden="true" size={22} />
+            </div>
+            <span className="section-kicker">Le brief Acteo</span>
+            <h2 id="newsletter-title">Une idee terrain. Une decision plus claire.</h2>
+            <p>
+              Chaque mois, un point de vue court sur le leadership, la performance et la
+              transformation des organisations. Sans bruit, sans theorie inutile.
+            </p>
+            {newsletterSent ? (
+              <div className="newsletter-success" role="status">
+                <CheckCircle2 aria-hidden="true" size={22} />
+                <div>
+                  <strong>Merci pour votre inscription.</strong>
+                  <span>Le prochain brief arrive bientot dans votre boite mail.</span>
+                </div>
+              </div>
+            ) : (
+              <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
+                <label htmlFor="newsletter-email">Email professionnel</label>
+                <div>
+                  <input
+                    id="newsletter-email"
+                    name="email"
+                    type="email"
+                    placeholder="vous@entreprise.com"
+                    autoComplete="email"
+                    required
+                    autoFocus
+                  />
+                  <button type="submit">
+                    S inscrire
+                    <ArrowUpRight aria-hidden="true" size={18} />
+                  </button>
+                </div>
+                <small>Un email par mois. Desinscription en un clic.</small>
+              </form>
+            )}
+          </section>
+        </div>
+      )}
     </div>
   );
 }
