@@ -1,14 +1,94 @@
 import React, { useState } from 'react';
+import {
+  ArrowUpRight,
+  BarChart3,
+  BrainCircuit,
+  CheckCircle2,
+  ChevronRight,
+  ClipboardCheck,
+  Cpu,
+  Gauge,
+  GraduationCap,
+  MessageSquareQuote,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  UsersRound,
+} from 'lucide-react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Overview from './components/Overview';
-import Services from './components/Services';
-import Quote from './components/Quote';
-import Approach from './components/Approach';
-import About from './components/About';
-import LinkedInDashboard from './components/LinkedInDashboard';
 import Footer from './components/Footer';
+import LinkedInDashboard from './components/LinkedInDashboard';
 import { Page } from './types';
+
+const bookingUrl = 'https://laurentrousseau.youcanbook.me';
+
+const services = [
+  {
+    eyebrow: 'Leadership',
+    title: 'Executive coaching',
+    description:
+      'Pour dirigeants, managers promus et responsables sous pression qui doivent arbitrer vite sans perdre leur posture, leur energie ou leur clarte.',
+    icon: BrainCircuit,
+    points: ['Seances de 90 minutes', 'Posture, decision, confiance', 'Support entre les sessions'],
+  },
+  {
+    eyebrow: 'Commercial',
+    title: 'Impact, questionnement et prise de parole',
+    description:
+      'Des formats courts pour transformer les interactions client: ecoute active, questions ouvertes, reformulation, pitch et histoire qui reste.',
+    icon: MessageSquareQuote,
+    points: ['Comites et soutenances', 'Vente consultative', 'Formats equipes 8 a 12 personnes'],
+  },
+  {
+    eyebrow: 'Performance',
+    title: 'Processus, qualite et resolution de problemes',
+    description:
+      'Une approche terrain pour cartographier les flux reels, nommer les pilotes, traiter les non-conformites et piloter les couts de non-qualite.',
+    icon: Gauge,
+    points: ['ISO 9001 et ISO 14001', '8D, AMDEC, Ishikawa', 'Tableaux de bord utiles'],
+  },
+  {
+    eyebrow: 'RSE',
+    title: 'RSE, QSE et transformation durable',
+    description:
+      'Diagnostic, feuille de route, formation, indicateurs et preparation aux labels ou certifications pour ancrer la responsabilite dans les pratiques.',
+    icon: ShieldCheck,
+    points: ['Label Engage RSE AFNOR', 'ISO 26000 et QSE', 'Communication parties prenantes'],
+  },
+];
+
+const reviews = [
+  {
+    quote:
+      'We did not touch the software. We focused on another type of touch: the human touch.',
+    name: 'Jurjen Julianus',
+    role: 'Manager Presales Benelux, CCH Tagetik - Wolters Kluwer',
+  },
+  {
+    quote:
+      'His dynamic approach and his capacity to engage all experts in a sales transformation.',
+    name: 'Eric Leger',
+    role: 'Associate Partner, KPMG',
+  },
+  {
+    quote:
+      'Son regard externe, precis et pragmatique m a permis de prendre du recul, de poser un cadre clair et d avancer avec methode.',
+    name: 'Fanny Kleniec',
+    role: 'Business Developer Director, ex-CCH Tagetik',
+  },
+  {
+    quote:
+      'Laurent ne se limite pas a un coaching theorique: il comprend les realites du terrain.',
+    name: 'Badr Chtouki',
+    role: 'CEO, Impactera',
+  },
+];
+
+const credentials = [
+  'Audits QSE et RSE pour des groupes industriels, BTP, ingenierie et projets internationaux.',
+  'Accompagnement Label Engage RSE, Responsible Steel, ISO 9001, ISO 14001 et ISO 45001.',
+  'Experience operationnelle en direction projet, qualite, mobilite electrique, evenementiel et transformation commerciale.',
+];
 
 function App() {
   const getInitialPage = (): Page => {
@@ -22,27 +102,245 @@ function App() {
   };
 
   const [currentPage, setCurrentPage] = useState<Page>(getInitialPage);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSent(true);
+  };
+
+  if (currentPage === 'linkedin') {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
+        <main>
+          <LinkedInDashboard />
+        </main>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="site-shell">
       <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
-      
-      <main className="flex-grow">
-        {currentPage === 'home' ? (
-          <>
-            <Hero />
-            <Overview />
-            <Services />
-            <Quote />
-            <Approach />
-          </>
-        ) : currentPage === 'about' ? (
-          <About />
-        ) : (
-          <LinkedInDashboard />
-        )}
+
+      <main>
+        <section id="intro" className="hero-section">
+          <div className="hero-grid">
+            <div className="hero-copy">
+              <div className="signal-row">
+                <span className="signal-dot" />
+                Conseil, coaching et formation pour leaders en mouvement
+              </div>
+              <h1>Faire grandir ceux qui portent vos projets</h1>
+              <p>
+                Acteo Management aide les dirigeants, managers et equipes projet a transformer
+                les enjeux complexes en decisions claires, pratiques durables et performance
+                mesurable.
+              </p>
+              <div className="hero-actions">
+                <a href="#contact" className="primary-action">
+                  Demander un diagnostic
+                  <ChevronRight aria-hidden="true" size={18} />
+                </a>
+                <a href={bookingUrl} target="_blank" rel="noreferrer" className="secondary-action">
+                  Reserver un appel
+                  <ArrowUpRight aria-hidden="true" size={17} />
+                </a>
+              </div>
+            </div>
+
+            <div className="hero-panel" aria-label="Acteo operating model">
+              <div className="panel-topline">
+                <img src="/logo-acteo.png" alt="Acteo Management" />
+                <span>Executive operating system</span>
+              </div>
+              <div className="metric-grid">
+                <div>
+                  <strong>4</strong>
+                  <span>offres prioritaires</span>
+                </div>
+                <div>
+                  <strong>ISO</strong>
+                  <span>QSE, RSE, processus</span>
+                </div>
+                <div>
+                  <strong>90'</strong>
+                  <span>sessions coaching</span>
+                </div>
+                <div>
+                  <strong>10k+</strong>
+                  <span>problemes resolus</span>
+                </div>
+              </div>
+              <div className="system-lines">
+                <span style={{ width: '88%' }} />
+                <span style={{ width: '64%' }} />
+                <span style={{ width: '74%' }} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="section-block services-block">
+          <div className="section-heading">
+            <span className="section-kicker">Services</span>
+            <h2>Quatre leviers pour faire progresser la strategie et les personnes</h2>
+            <p>
+              Les offres croisent conseil, coaching et formation. Elles partent du terrain,
+              structurent les pratiques et donnent aux equipes des outils utilisables des le
+              lendemain.
+            </p>
+          </div>
+
+          <div className="services-grid">
+            {services.map((service) => (
+              <article className="service-card" key={service.title}>
+                <div className="service-icon">
+                  <service.icon aria-hidden="true" size={24} />
+                </div>
+                <span>{service.eyebrow}</span>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+                <ul>
+                  {service.points.map((point) => (
+                    <li key={point}>
+                      <CheckCircle2 aria-hidden="true" size={16} />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="courses" className="section-block course-band">
+          <div>
+            <span className="section-kicker">Cours et formats</span>
+            <h2>Des modules courts, intensifs et directement actionnables</h2>
+          </div>
+          <div className="course-list">
+            <div>
+              <GraduationCap aria-hidden="true" />
+              <h3>Leader coach</h3>
+              <p>Cadre, feedback, regles d equipe, action sous sept jours.</p>
+            </div>
+            <div>
+              <Target aria-hidden="true" />
+              <h3>L art du questionnement</h3>
+              <p>Faire parler le client avant de proposer, passer du besoin technique a l enjeu.</p>
+            </div>
+            <div>
+              <ClipboardCheck aria-hidden="true" />
+              <h3>Audit et processus</h3>
+              <p>Audit multi-sites, indicateurs utiles, revue de processus qui decide.</p>
+            </div>
+            <div>
+              <Cpu aria-hidden="true" />
+              <h3>Efficacite avec l IA</h3>
+              <p>Cas d usage, prompts, automatisation et methodes pour gagner du temps.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="reviews" className="section-block reviews-block">
+          <div className="section-heading compact">
+            <span className="section-kicker">Reviews</span>
+            <h2>Des dirigeants parlent d impact concret</h2>
+          </div>
+          <div className="reviews-grid">
+            {reviews.map((review) => (
+              <figure className="review-card" key={review.name}>
+                <MessageSquareQuote aria-hidden="true" size={24} />
+                <blockquote>{review.quote}</blockquote>
+                <figcaption>
+                  <strong>{review.name}</strong>
+                  <span>{review.role}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section id="about" className="section-block about-block">
+          <div className="about-visual">
+            <img src="/PHOTO-2025-10-20-08-34-27.jpg" alt="Acteo Management workshop" />
+          </div>
+          <div className="about-copy">
+            <span className="section-kicker">A propos</span>
+            <h2>Une equipe hybride: direction, terrain, systemes de management et coaching</h2>
+            <p>
+              Laurent Rousseau et Delphine Bessot combinent experience operationnelle, formation,
+              coaching de dirigeants, projets internationaux et expertise QSE/RSE. Leur difference
+              tient dans le passage constant entre posture humaine et execution mesurable.
+            </p>
+            <div className="credential-list">
+              {credentials.map((credential) => (
+                <div key={credential}>
+                  <Sparkles aria-hidden="true" size={18} />
+                  <span>{credential}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="section-block contact-block">
+          <div className="contact-copy">
+            <span className="section-kicker">Contact</span>
+            <h2>Parlons de votre prochain palier</h2>
+            <p>
+              Decrivez votre contexte, vos enjeux et le public concerne. Acteo peut proposer un
+              diagnostic court, un parcours coaching ou un module de formation adapte.
+            </p>
+            <div className="contact-stat">
+              <BarChart3 aria-hidden="true" />
+              <span>Reponse orientee action, pas catalogue standard.</span>
+            </div>
+          </div>
+
+          <form className="lead-form" onSubmit={handleSubmit}>
+            <label>
+              Nom
+              <input name="name" type="text" placeholder="Votre nom" required />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" placeholder="vous@entreprise.com" required />
+            </label>
+            <label>
+              Service prioritaire
+              <select name="service" defaultValue="Executive coaching">
+                <option>Executive coaching</option>
+                <option>Formation leadership ou commercial</option>
+                <option>QSE, RSE ou processus</option>
+                <option>Je ne sais pas encore</option>
+              </select>
+            </label>
+            <label>
+              Message
+              <textarea
+                name="message"
+                placeholder="Contexte, objectifs, equipe concernee, timing..."
+                rows={5}
+                required
+              />
+            </label>
+            <button type="submit">
+              Envoyer la demande
+              <ArrowUpRight aria-hidden="true" size={18} />
+            </button>
+            {sent && (
+              <p className="form-success" role="status">
+                Merci. Le formulaire est pret cote interface. Pour une mise en production, il faudra
+                connecter ce submit a votre outil email ou CRM.
+              </p>
+            )}
+          </form>
+        </section>
       </main>
-      
+
       <Footer onNavigate={setCurrentPage} />
     </div>
   );
