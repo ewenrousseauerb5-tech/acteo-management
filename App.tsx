@@ -29,40 +29,32 @@ const services = [
   {
     eyebrow: 'Leadership',
     title: 'Executive coaching',
-    description:
-      'Pour dirigeants, managers promus et responsables sous pression qui doivent arbitrer vite sans perdre leur posture, leur energie ou leur clarte.',
+    description: 'Clarifier la posture, les arbitrages et la confiance dans les moments qui comptent.',
     icon: BrainCircuit,
-    points: ['Seances de 90 minutes', 'Posture, decision, confiance', 'Support entre les sessions'],
     nextDate: '14 octobre 2026',
     format: 'Paris + distanciel',
   },
   {
     eyebrow: 'Commercial',
     title: 'Impact, questionnement et prise de parole',
-    description:
-      'Des formats courts pour transformer les interactions client: ecoute active, questions ouvertes, reformulation, pitch et histoire qui reste.',
+    description: 'Transformer les conversations client en decisions, adhesion et mouvement.',
     icon: MessageSquareQuote,
-    points: ['Comites et soutenances', 'Vente consultative', 'Formats equipes 8 a 12 personnes'],
     nextDate: '6 novembre 2026',
     format: 'Vigo + intra-entreprise',
   },
   {
     eyebrow: 'Performance',
     title: 'Processus, qualite et resolution de problemes',
-    description:
-      'Une approche terrain pour cartographier les flux reels, nommer les pilotes, traiter les non-conformites et piloter les couts de non-qualite.',
+    description: 'Rendre les processus visibles, utiles et pilotables par les equipes.',
     icon: Gauge,
-    points: ['ISO 9001 et ISO 14001', '8D, AMDEC, Ishikawa', 'Tableaux de bord utiles'],
     nextDate: '19 novembre 2026',
     format: 'Classe virtuelle',
   },
   {
     eyebrow: 'RSE',
     title: 'RSE, QSE et transformation durable',
-    description:
-      'Diagnostic, feuille de route, formation, indicateurs et preparation aux labels ou certifications pour ancrer la responsabilite dans les pratiques.',
+    description: 'Passer des engagements a une feuille de route credible et mesurable.',
     icon: ShieldCheck,
-    points: ['Label Engage RSE AFNOR', 'ISO 26000 et QSE', 'Communication parties prenantes'],
     nextDate: '3 decembre 2026',
     format: 'Lyon + distanciel',
   },
@@ -96,9 +88,9 @@ const reviews = [
 ];
 
 const credentials = [
-  'Audits QSE et RSE pour des groupes industriels, BTP, ingenierie et projets internationaux.',
-  'Accompagnement Label Engage RSE, Responsible Steel, ISO 9001, ISO 14001 et ISO 45001.',
-  'Experience operationnelle en direction projet, qualite, mobilite electrique, evenementiel et transformation commerciale.',
+  'Direction et transformation',
+  'Coaching de dirigeants',
+  'QSE, RSE et projets internationaux',
 ];
 
 function App() {
@@ -195,9 +187,8 @@ function App() {
               </div>
               <h1>Faire grandir ceux qui portent vos projets</h1>
               <p>
-                Nous accompagnons les dirigeants, managers et equipes projet quand la decision
-                devient complexe, que les pratiques doivent evoluer et que le collectif doit
-                retrouver de l elan.
+                Conseil, coaching et formation pour decider plus clairement et faire avancer le
+                collectif.
               </p>
               <div className="hero-actions">
                 <button
@@ -222,19 +213,17 @@ function App() {
                 <span>France · Espagne · International</span>
               </div>
             </div>
-
+            <figure className="hero-portrait">
+              <img src="/acteo-portrait.png" alt="Laurent Rousseau et Delphine Bessot, Acteo Management" />
+              <figcaption>Experience terrain. Regard humain. Resultats mesurables.</figcaption>
+            </figure>
           </div>
         </section>
 
         <section id="services" className="section-block services-block">
           <div className="section-heading">
             <span className="section-kicker">Services</span>
-            <h2>Quatre leviers pour faire progresser la strategie et les personnes</h2>
-            <p>
-              Les offres croisent conseil, coaching et formation. Elles partent du terrain,
-              structurent les pratiques et donnent aux equipes des outils utilisables des le
-              lendemain.
-            </p>
+            <h2>Quatre expertises. Un meme objectif: faire avancer.</h2>
           </div>
 
           <div className="services-grid">
@@ -253,14 +242,10 @@ function App() {
                     <span>{service.nextDate} · {service.format}</span>
                   </div>
                 </div>
-                <ul>
-                  {service.points.map((point) => (
-                    <li key={point}>
-                      <CheckCircle2 aria-hidden="true" size={16} />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
+                <a href="#contact" className="service-link">
+                  En parler
+                  <ArrowUpRight aria-hidden="true" size={16} />
+                </a>
               </article>
             ))}
           </div>
@@ -269,7 +254,7 @@ function App() {
         <section id="courses" className="section-block course-band">
           <div className="course-intro">
             <span className="section-kicker">Cours et formats</span>
-            <h2>Des modules courts, intensifs et directement actionnables</h2>
+            <h2>Des formats courts. Des effets durables.</h2>
             <div className="course-motion" aria-label="Methode Acteo: comprendre, aligner, decider et ancrer">
               <div className="motion-heading">
                 <span>Methode Acteo</span>
@@ -330,7 +315,7 @@ function App() {
             <h2>Des dirigeants parlent d impact concret</h2>
           </div>
           <div className="reviews-grid">
-            {reviews.map((review) => (
+            {reviews.slice(0, 3).map((review) => (
               <figure className="review-card" key={review.name}>
                 <MessageSquareQuote aria-hidden="true" size={24} />
                 <blockquote>{review.quote}</blockquote>
@@ -349,11 +334,10 @@ function App() {
           </div>
           <div className="about-copy">
             <span className="section-kicker">A propos</span>
-            <h2>Une equipe hybride: direction, terrain, systemes de management et coaching</h2>
+            <h2>Deux regards. Une meme exigence de concret.</h2>
             <p>
-              Laurent Rousseau et Delphine Bessot combinent experience operationnelle, formation,
-              coaching de dirigeants, projets internationaux et expertise QSE/RSE. Leur difference
-              tient dans le passage constant entre posture humaine et execution mesurable.
+              Laurent Rousseau et Delphine Bessot relient experience operationnelle, coaching et
+              systemes de management pour transformer sans perdre l humain.
             </p>
             <div className="credential-list">
               {credentials.map((credential) => (
@@ -371,8 +355,8 @@ function App() {
             <span className="section-kicker">Contact</span>
             <h2>Parlons de votre prochain palier</h2>
             <p>
-              Decrivez votre contexte, vos enjeux et le public concerne. Acteo peut proposer un
-              diagnostic court, un parcours coaching ou un module de formation adapte.
+              Quelques lignes suffisent pour commencer. Nous revenons vers vous avec une premiere
+              lecture de la situation.
             </p>
             <div className="contact-stat">
               <BarChart3 aria-hidden="true" />
