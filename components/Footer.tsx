@@ -26,8 +26,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </span>
         </a>
         <p>
-          Conseil, coaching et formation pour dirigeants, managers et equipes projet qui veulent
-          progresser avec methode.
+          Des formations-actions pour transformer les acquis en résultats concrets, sur le terrain.
         </p>
       </div>
 
@@ -50,9 +49,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         <div>
           <h3>Liens</h3>
-          <a href="#services">Services</a>
-          <a href="#reviews">Reviews</a>
-          <a href="#contact">Demander un diagnostic</a>
+          <a href="#services">Formations</a>
+          <a href="#courses">Méthode Acteo</a>
+          <a href="#reviews">Témoignages</a>
+          <a href="#contact">Échanger sur mon besoin</a>
           <a href="https://www.linkedin.com/company/acteo-management/posts/?feedView=all" target="_blank" rel="noreferrer">
             <Linkedin aria-hidden="true" size={16} />
             LinkedIn
@@ -62,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Acteo Management Iberica S.L</span>
-        <span>Executive consulting, coaching, QSE/RSE</span>
+        <span>Formation-action, coaching, QSE/RSE</span>
       </div>
     </footer>
   );

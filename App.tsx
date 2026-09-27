@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowUpRight,
   ArrowLeft,
   ArrowRight,
   BarChart3,
   BrainCircuit,
+  BriefcaseBusiness,
   CalendarDays,
   CheckCircle2,
   ChevronRight,
   ClipboardCheck,
-  Cpu,
   Gauge,
+  Globe2,
   GraduationCap,
   Mail,
   MessageSquareQuote,
-  ShieldCheck,
-  Sparkles,
   Target,
   UsersRound,
   X,
@@ -27,38 +26,74 @@ import { Page } from './types';
 
 const bookingUrl = 'https://laurentrousseau.youcanbook.me';
 
-const services = [
+const formations = [
   {
     eyebrow: 'Leadership',
-    title: 'Executive coaching',
-    description: 'Clarifier la posture, les arbitrages et la confiance dans les moments qui comptent.',
+    title: 'De manager à leader coach',
+    description: 'Poser un cadre clair, responsabiliser, donner du feedback et mettre ses collaborateurs en action.',
     icon: BrainCircuit,
-    nextDate: '14 octobre 2026',
-    format: 'Paris + distanciel',
+    duration: '1 jour + 1 h de retour d’expérience à J+15',
+    nextDate: '20 novembre 2026',
+    time: '8h30–12h30 · 13h30–16h30',
   },
   {
-    eyebrow: 'Commercial',
-    title: 'Impact, questionnement et prise de parole',
-    description: 'Transformer les conversations client en decisions, adhesion et mouvement.',
+    eyebrow: 'Communication',
+    title: 'Adapter sa communication à chaque profil',
+    description: 'Quatre styles comportementaux pour ajuster son rythme, ses mots et son approche avec plus d’impact.',
     icon: MessageSquareQuote,
-    nextDate: '6 novembre 2026',
-    format: 'Vigo + intra-entreprise',
+    duration: '2 h + 1 h de retour d’expérience à J+15',
+    nextDate: '23 octobre 2026',
+    time: '9h00–11h00',
   },
   {
-    eyebrow: 'Performance',
-    title: 'Processus, qualite et resolution de problemes',
-    description: 'Rendre les processus visibles, utiles et pilotables par les equipes.',
+    eyebrow: 'Organisation',
+    title: 'Faire avancer sans lien hiérarchique',
+    description: 'Projet, processus ou organisation matricielle : mobiliser, clarifier les responsabilités et obtenir des engagements.',
+    icon: UsersRound,
+    duration: '1 jour + 1 h de retour d’expérience à J+15',
+    nextDate: '30 octobre 2026',
+    time: '8h30–12h30 · 13h30–16h30',
+  },
+  {
+    eyebrow: 'Efficacité',
+    title: 'Résoudre durablement les problèmes',
+    description: 'Identifier les causes racines, construire les bonnes actions et éviter la récidive avec des outils éprouvés.',
     icon: Gauge,
-    nextDate: '19 novembre 2026',
-    format: 'Classe virtuelle',
+    duration: '1 jour + 1 h de retour d’expérience à J+15',
+    nextDate: '6 novembre 2026',
+    time: '8h30–12h30 · 13h30–16h30',
   },
   {
-    eyebrow: 'RSE',
-    title: 'RSE, QSE et transformation durable',
-    description: 'Passer des engagements a une feuille de route credible et mesurable.',
-    icon: ShieldCheck,
-    nextDate: '3 decembre 2026',
-    format: 'Lyon + distanciel',
+    eyebrow: 'Systèmes de management',
+    title: 'ISO 9001 & ISO 14001 – versions 2026',
+    description: 'Comprendre, anticiper et traduire les évolutions en actions concrètes pour votre organisation.',
+    icon: ClipboardCheck,
+    duration: '2 × 2 h + 1 h de retour d’expérience à J+15',
+    nextDate: '20 novembre 2026',
+    time: '9h00–11h00 · 13h30–15h30',
+  },
+];
+
+const differences = [
+  {
+    icon: BriefcaseBusiness,
+    title: 'Des managers de terrain',
+    text: 'Nous avons dirigé des équipes, des projets, des opérations et des transformations avant de les enseigner.',
+  },
+  {
+    icon: Target,
+    title: 'Des situations réelles',
+    text: 'Vous travaillez sur vos propres problématiques et repartez avec des actions directement applicables.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Un rendez-vous à J+15',
+    text: 'Une heure pour partager les retours d’expérience, lever les blocages et ajuster la mise en œuvre.',
+  },
+  {
+    icon: Globe2,
+    title: 'Une vision internationale',
+    text: 'France, Europe et international, en français, anglais ou espagnol, en ligne ou en présentiel.',
   },
 ];
 
@@ -77,22 +112,16 @@ const reviews = [
   },
   {
     quote:
-      'Son regard externe, precis et pragmatique m a permis de prendre du recul, de poser un cadre clair et d avancer avec methode.',
+      'Son regard externe, précis et pragmatique m’a permis de prendre du recul, de poser un cadre clair et d’avancer avec méthode.',
     name: 'Fanny Kleniec',
     role: 'Business Developer Director, ex-CCH Tagetik',
   },
   {
     quote:
-      'Laurent ne se limite pas a un coaching theorique: il comprend les realites du terrain.',
+      'Laurent ne se limite pas à un coaching théorique : il comprend les réalités du terrain.',
     name: 'Badr Chtouki',
     role: 'CEO, Impactera',
   },
-];
-
-const credentials = [
-  'Direction et transformation',
-  'Coaching de dirigeants',
-  'QSE, RSE et projets internationaux',
 ];
 
 function App() {
@@ -112,11 +141,18 @@ function App() {
   const [newsletterSent, setNewsletterSent] = useState(false);
   const [courseStep, setCourseStep] = useState(0);
   const [activeReview, setActiveReview] = useState(0);
+  const newsletterTriggered = useRef(false);
 
   useEffect(() => {
     if (currentPage !== 'home') return;
-    const timer = window.setTimeout(() => setNewsletterOpen(true), 6500);
-    return () => window.clearTimeout(timer);
+    const handleScroll = () => {
+      if (newsletterTriggered.current || window.scrollY < window.innerHeight * 0.72) return;
+      newsletterTriggered.current = true;
+      setNewsletterOpen(true);
+      window.removeEventListener('scroll', handleScroll);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage]);
 
   useEffect(() => {
@@ -200,28 +236,27 @@ function App() {
                 Conseil · Coaching · Formation
               </div>
               <h1>Faire grandir ceux qui portent vos projets</h1>
-              <p>
-                Conseil, coaching et formation pour decider plus clairement et faire avancer le
-                collectif.
+              <p className="hero-lead">
+                Des formations-actions en leadership, organisation et efficacité pour transformer
+                les acquis en résultats concrets.
               </p>
+              <div className="hero-promise">
+                <strong>On apprend. On applique. On échange. On progresse.</strong>
+                <span>
+                  Chaque formation associe apport méthodologique, exemples concrets, mise en
+                  pratique et suivi 15 jours plus tard sur vos situations réelles.
+                </span>
+              </div>
               <div className="hero-actions">
-                <button
-                  type="button"
-                  className="primary-action"
-                  onClick={() => setNewsletterOpen(true)}
-                >
-                  Recevoir le brief executif
-                  <Mail aria-hidden="true" size={18} />
-                </button>
-                <a href="#contact" className="secondary-action">
-                  Demander un diagnostic
+                <a href="#services" className="primary-action">
+                  Découvrir les formations
+                  <ChevronRight aria-hidden="true" size={18} />
+                </a>
+                <a href={bookingUrl} target="_blank" rel="noreferrer" className="secondary-action">
+                  Réserver un appel de 30 min
                   <ChevronRight aria-hidden="true" size={18} />
                 </a>
               </div>
-              <a href={bookingUrl} target="_blank" rel="noreferrer" className="hero-booking-link">
-                Ou reserver directement un appel de 30 minutes
-                <ArrowUpRight aria-hidden="true" size={15} />
-              </a>
               <div className="hero-signature">
                 <strong>Laurent Rousseau &amp; Delphine Bessot</strong>
                 <span>France · Espagne · International</span>
@@ -229,31 +264,48 @@ function App() {
             </div>
             <figure className="hero-portrait">
               <img src="/acteo-portrait.png" alt="Laurent Rousseau et Delphine Bessot, Acteo Management" />
-              <figcaption>Experience terrain. Regard humain. Resultats mesurables.</figcaption>
+              <figcaption>Expérience terrain. Regard humain. Résultats mesurables.</figcaption>
             </figure>
+          </div>
+        </section>
+
+        <section id="difference" className="section-block difference-block">
+          <div className="section-heading compact">
+            <span className="section-kicker">Pourquoi Acteo</span>
+            <h2>Une formation conçue pour être utilisée.</h2>
+          </div>
+          <div className="difference-grid">
+            {differences.map((difference) => (
+              <article className="difference-item" key={difference.title}>
+                <difference.icon aria-hidden="true" size={23} />
+                <h3>{difference.title}</h3>
+                <p>{difference.text}</p>
+              </article>
+            ))}
           </div>
         </section>
 
         <section id="services" className="section-block services-block">
           <div className="section-heading">
-            <span className="section-kicker">Services</span>
-            <h2>Quatre expertises. Un meme objectif: faire avancer.</h2>
+            <span className="section-kicker">Formations</span>
+            <h2>Cinq formations pour faire avancer votre organisation.</h2>
           </div>
 
           <div className="services-grid">
-            {services.map((service) => (
-              <article className="service-card" key={service.title}>
+            {formations.map((formation) => (
+              <article className="service-card" key={formation.title}>
                 <div className="service-icon">
-                  <service.icon aria-hidden="true" size={24} />
+                  <formation.icon aria-hidden="true" size={24} />
                 </div>
-                <span>{service.eyebrow}</span>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                <span>{formation.eyebrow}</span>
+                <h3>{formation.title}</h3>
+                <p>{formation.description}</p>
+                <strong className="service-duration">{formation.duration}</strong>
                 <div className="service-date">
                   <CalendarDays aria-hidden="true" size={17} />
                   <div>
                     <strong>Prochaine session</strong>
-                    <span>{service.nextDate} · {service.format}</span>
+                    <span>{formation.nextDate}<br />{formation.time}</span>
                   </div>
                 </div>
                 <a href="#contact" className="service-link">
@@ -263,16 +315,21 @@ function App() {
               </article>
             ))}
           </div>
+          <p className="session-note">
+            Nous privilégions les petits groupes pour favoriser les échanges et la mise en
+            pratique. La session est confirmée à partir de 5 participants. Vous serez informé(e)
+            au plus tard 5 jours avant la date prévue.
+          </p>
         </section>
 
         <section id="courses" className="section-block course-band">
           <div className="course-intro">
-            <span className="section-kicker">Cours et formats</span>
-            <h2>Des formats courts. Des effets durables.</h2>
-            <div className="course-motion" aria-label="Methode Acteo: comprendre, aligner, decider et ancrer">
+            <span className="section-kicker">Comment ça marche</span>
+            <h2>Quelques heures pour comprendre. 15 jours pour expérimenter.</h2>
+            <div className="course-motion" aria-label="Méthode Acteo : comprendre, aligner, décider et ancrer">
               <div className="motion-heading">
-                <span>Methode Acteo</span>
-                <strong>De la complexite a l action</strong>
+                <span>Méthode Acteo</span>
+                <strong>De la complexité à l’action</strong>
               </div>
               <div className="motion-flow">
                 <span className="motion-track" aria-hidden="true">
@@ -280,8 +337,8 @@ function App() {
                 </span>
                 {[
                   ['01', 'Comprendre', 'Terrain · enjeux · parties prenantes'],
-                  ['02', 'Aligner', 'Vision · roles · priorites'],
-                  ['03', 'Decider', 'Arbitrages · plan · engagement'],
+                  ['02', 'Aligner', 'Vision · rôles · priorités'],
+                  ['03', 'Décider', 'Arbitrages · plan · engagement'],
                   ['04', 'Ancrer', 'Rituels · mesure · autonomie'],
                 ].map(([number, title, detail], index) => (
                   <div className={`motion-step ${courseStep === index ? 'is-active' : ''}`} key={number}>
@@ -298,35 +355,60 @@ function App() {
           <div className="course-list">
             <div>
               <GraduationCap aria-hidden="true" />
-              <span className="course-date">14 oct. 2026</span>
-              <h3>Leader coach</h3>
-              <p>Cadre, feedback, regles d equipe, action sous sept jours.</p>
+              <span className="course-date">J0</span>
+              <h3>Se former</h3>
+              <p>Concepts, méthodes, outils et cas pratiques. Préparer son plan d’action.</p>
             </div>
             <div>
               <Target aria-hidden="true" />
-              <span className="course-date">6 nov. 2026</span>
-              <h3>L art du questionnement</h3>
-              <p>Faire parler le client avant de proposer, passer du besoin technique a l enjeu.</p>
+              <span className="course-date">J+1 à J+14</span>
+              <h3>Mettre en pratique</h3>
+              <p>Tester les outils dans sa situation professionnelle réelle.</p>
             </div>
             <div>
               <ClipboardCheck aria-hidden="true" />
-              <span className="course-date">19 nov. 2026</span>
-              <h3>Audit et processus</h3>
-              <p>Audit multi-sites, indicateurs utiles, revue de processus qui decide.</p>
+              <span className="course-date">J+15</span>
+              <h3>Suivre et améliorer</h3>
+              <p>Partager, résoudre les difficultés, ajuster et repartir avec la prochaine action.</p>
             </div>
-            <div>
-              <Cpu aria-hidden="true" />
-              <span className="course-date">3 dec. 2026</span>
-              <h3>Efficacite avec l IA</h3>
-              <p>Cas d usage, prompts, automatisation et methodes pour gagner du temps.</p>
+            <p className="course-closing">La formation ne s’arrête pas quand la session se termine.</p>
+          </div>
+        </section>
+
+        <section id="about" className="section-block about-block">
+          <div className="about-visual">
+            <img src="/PHOTO-2025-10-20-08-34-27.jpg" alt="Laurent Rousseau et Delphine Bessot" />
+          </div>
+          <div className="about-copy">
+            <span className="section-kicker">Les formateurs</span>
+            <h2>Deux parcours de dirigeants et consultants. Une même obsession : l’application terrain.</h2>
+            <div className="profile-list">
+              <article>
+                <h3>Delphine Bessot</h3>
+                <strong>Organisation · Management transverse · QSE-RSE</strong>
+                <p>
+                  25 ans d’expérience en entreprise et en conseil. Auditrice de certification QSE
+                  en France et à l’international, COO de start-up, spécialiste des processus et de
+                  l’amélioration des organisations.
+                </p>
+              </article>
+              <article>
+                <h3>Laurent Rousseau</h3>
+                <strong>Vision stratégique · Leadership · Projets complexes</strong>
+                <p>
+                  20 ans de direction dans l’automobile, ancien Directeur Qualité d’un programme de
+                  500 M€, executive coach et formateur. Plus de 10 000 problèmes traités avec les
+                  méthodes de résolution de problèmes.
+                </p>
+              </article>
             </div>
           </div>
         </section>
 
         <section id="reviews" className="section-block reviews-block">
           <div className="section-heading compact">
-            <span className="section-kicker">Reviews</span>
-            <h2>Des dirigeants parlent d impact concret</h2>
+            <span className="section-kicker">Témoignages</span>
+            <h2>Des dirigeants parlent d’impact concret</h2>
           </div>
           <div className="reviews-carousel">
             <div className="reviews-viewport" aria-live="polite">
@@ -350,13 +432,13 @@ function App() {
               </div>
             </div>
             <div className="review-controls">
-              <div className="review-dots" aria-label="Choisir un temoignage">
+              <div className="review-dots" aria-label="Choisir un témoignage">
                 {reviews.map((review, index) => (
                   <button
                     type="button"
                     className={activeReview === index ? 'is-active' : ''}
                     onClick={() => setActiveReview(index)}
-                    aria-label={`Temoignage de ${review.name}`}
+                    aria-label={`Témoignage de ${review.name}`}
                     aria-pressed={activeReview === index}
                     key={review.name}
                   />
@@ -366,14 +448,14 @@ function App() {
                 <button
                   type="button"
                   onClick={() => setActiveReview((activeReview - 1 + reviews.length) % reviews.length)}
-                  aria-label="Temoignage precedent"
+                  aria-label="Témoignage précédent"
                 >
                   <ArrowLeft aria-hidden="true" size={19} />
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveReview((activeReview + 1) % reviews.length)}
-                  aria-label="Temoignage suivant"
+                  aria-label="Témoignage suivant"
                 >
                   <ArrowRight aria-hidden="true" size={19} />
                 </button>
@@ -382,39 +464,38 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section-block about-block">
-          <div className="about-visual">
-            <img src="/PHOTO-2025-10-20-08-34-51.jpg" alt="Laurent Rousseau et Delphine Bessot" />
-          </div>
-          <div className="about-copy">
-            <span className="section-kicker">A propos</span>
-            <h2>Deux regards. Une meme exigence de concret.</h2>
+        <section className="custom-training-band">
+          <div>
+            <span className="section-kicker">Formation sur mesure</span>
+            <h2>Un autre besoin ?</h2>
             <p>
-              Laurent Rousseau et Delphine Bessot relient experience operationnelle, coaching et
-              systemes de management pour transformer sans perdre l humain.
+              Négociation, prise de parole, IA, formation de formateurs… Nous concevons la
+              formation-action qui vous correspond.
             </p>
-            <div className="credential-list">
-              {credentials.map((credential) => (
-                <div key={credential}>
-                  <Sparkles aria-hidden="true" size={18} />
-                  <span>{credential}</span>
-                </div>
-              ))}
-            </div>
           </div>
+          <a href="#contact" className="primary-action">
+            Nous consulter
+            <ArrowUpRight aria-hidden="true" size={18} />
+          </a>
+        </section>
+
+        <section className="belief-band" aria-label="La promesse Acteo">
+          <p>Une formation ne devrait pas se terminer par « Merci, au revoir ».</p>
+          <h2>Chez Acteo, elle se termine quand vous avez commencé à l’utiliser.</h2>
+          <span>Formation → application terrain → retour d’expérience à J+15</span>
         </section>
 
         <section id="contact" className="section-block contact-block">
           <div className="contact-copy">
             <span className="section-kicker">Contact</span>
-            <h2>Parlons de votre prochain palier</h2>
+            <h2>Un besoin, une équipe, un challenge ?</h2>
             <p>
-              Quelques lignes suffisent pour commencer. Nous revenons vers vous avec une premiere
-              lecture de la situation.
+              Décrivez-nous la situation en quelques lignes. Nous revenons vers vous pour identifier
+              le format le plus utile : formation existante ou accompagnement sur mesure.
             </p>
             <div className="contact-stat">
               <BarChart3 aria-hidden="true" />
-              <span>Reponse orientee action, pas catalogue standard.</span>
+              <span>Une première réponse concrète, sans formulaire à rallonge.</span>
             </div>
           </div>
 
@@ -428,11 +509,14 @@ function App() {
               <input name="email" type="email" placeholder="vous@entreprise.com" required />
             </label>
             <label>
-              Service prioritaire
-              <select name="service" defaultValue="Executive coaching">
-                <option>Executive coaching</option>
-                <option>Formation leadership ou commercial</option>
-                <option>QSE, RSE ou processus</option>
+              Besoin prioritaire
+              <select name="service" defaultValue="Je ne sais pas encore">
+                <option>Leadership</option>
+                <option>Communication</option>
+                <option>Management transversal</option>
+                <option>Résolution de problèmes</option>
+                <option>ISO 9001 ou ISO 14001</option>
+                <option>Formation sur mesure</option>
                 <option>Je ne sais pas encore</option>
               </select>
             </label>
@@ -440,19 +524,19 @@ function App() {
               Message
               <textarea
                 name="message"
-                placeholder="Contexte, objectifs, equipe concernee, timing..."
+                placeholder="Contexte, objectifs, équipe concernée, timing..."
                 rows={5}
                 required
               />
             </label>
             <button type="submit">
-              Envoyer la demande
+              Échanger sur mon besoin
               <ArrowUpRight aria-hidden="true" size={18} />
             </button>
             {sent && (
               <p className="form-success" role="status">
-                Merci. Le formulaire est pret cote interface. Pour une mise en production, il faudra
-                connecter ce submit a votre outil email ou CRM.
+                Merci. Votre demande est prête à être transmise. La connexion à votre outil email
+                ou CRM sera activée lors de la mise en production du formulaire.
               </p>
             )}
           </form>
@@ -487,17 +571,17 @@ function App() {
               <Mail aria-hidden="true" size={22} />
             </div>
             <span className="section-kicker">Le brief Acteo</span>
-            <h2 id="newsletter-title">Une idee terrain. Une decision plus claire.</h2>
+            <h2 id="newsletter-title">Une idée terrain. Une décision plus claire.</h2>
             <p>
               Chaque mois, un point de vue court sur le leadership, la performance et la
-              transformation des organisations. Sans bruit, sans theorie inutile.
+              transformation des organisations. Sans bruit, sans théorie inutile.
             </p>
             {newsletterSent ? (
               <div className="newsletter-success" role="status">
                 <CheckCircle2 aria-hidden="true" size={22} />
                 <div>
                   <strong>Merci pour votre inscription.</strong>
-                  <span>Le prochain brief arrive bientot dans votre boite mail.</span>
+                  <span>Le prochain brief arrive bientôt dans votre boîte mail.</span>
                 </div>
               </div>
             ) : (
@@ -514,11 +598,11 @@ function App() {
                     autoFocus
                   />
                   <button type="submit">
-                    S inscrire
+                    S’inscrire
                     <ArrowUpRight aria-hidden="true" size={18} />
                   </button>
                 </div>
-                <small>Un email par mois. Desinscription en un clic.</small>
+                <small>Un email par mois. Désinscription en un clic.</small>
               </form>
             )}
           </section>

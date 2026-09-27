@@ -8,10 +8,10 @@ interface NavbarProps {
 }
 
 const links = [
-  { label: 'Services', href: '#services' },
-  { label: 'Cours', href: '#courses' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Equipe', href: '#about' },
+  { label: 'Formations', href: '#services' },
+  { label: 'Méthode', href: '#courses' },
+  { label: 'Équipe', href: '#about' },
+  { label: 'Témoignages', href: '#reviews' },
   { label: 'Contact', href: '#contact' },
 ];
 
