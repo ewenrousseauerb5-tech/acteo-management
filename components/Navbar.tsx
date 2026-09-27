@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowUpRight, BarChart3, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { Page } from '../types';
 
 interface NavbarProps {
@@ -35,12 +35,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     }, 0);
   };
 
-  const goLinkedIn = () => {
-    onNavigate('linkedin');
-    setIsOpen(false);
-    window.scrollTo(0, 0);
-  };
-
   const navClass = `site-nav ${isScrolled || currentPage === 'linkedin' ? 'site-nav-solid' : ''}`;
 
   return (
@@ -64,10 +58,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       )}
 
       <div className="nav-actions">
-        <button type="button" className="insight-link" onClick={goLinkedIn}>
-          <BarChart3 aria-hidden="true" size={16} />
-          Insights
-        </button>
         <a href="#contact" className="nav-cta">
           Diagnostic
           <ArrowUpRight aria-hidden="true" size={16} />
@@ -90,9 +80,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               {link.label}
             </a>
           ))}
-          <button type="button" onClick={goLinkedIn}>
-            Insights LinkedIn
-          </button>
         </div>
       )}
     </nav>

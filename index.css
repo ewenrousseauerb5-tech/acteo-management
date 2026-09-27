@@ -112,8 +112,7 @@ a {
   gap: clamp(14px, 2.4vw, 30px);
 }
 
-.nav-links a,
-.insight-link {
+.nav-links a {
   color: currentColor;
   opacity: 0.78;
   font-size: 0.9rem;
@@ -121,14 +120,12 @@ a {
   transition: opacity 160ms ease, color 160ms ease;
 }
 
-.nav-links a:hover,
-.insight-link:hover {
+.nav-links a:hover {
   opacity: 1;
   color: var(--green-2);
 }
 
-.site-nav-solid .nav-links a:hover,
-.site-nav-solid .insight-link:hover {
+.site-nav-solid .nav-links a:hover {
   color: var(--green);
 }
 
@@ -139,18 +136,11 @@ a {
   gap: 10px;
 }
 
-.insight-link,
 .mobile-menu button {
   appearance: none;
   border: 0;
   background: transparent;
   cursor: pointer;
-}
-
-.insight-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
 }
 
 .nav-cta,
