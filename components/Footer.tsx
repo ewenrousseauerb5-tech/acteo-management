@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       </div>
 
       <div className="footer-grid">
-        <div>
+        <div className="footer-contact">
           <h3>Contact</h3>
           <a href="mailto:d.bessot@acteomanagement.com">
             <Mail aria-hidden="true" size={16} />
@@ -47,7 +47,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </span>
         </div>
 
-        <div>
+        <div className="footer-links">
           <h3>Liens</h3>
           <a href="#services">Formations</a>
           <a href="#courses">Méthode Acteo</a>
