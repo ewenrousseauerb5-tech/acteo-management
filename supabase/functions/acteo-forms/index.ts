@@ -39,6 +39,104 @@ function escapeHtml(value: string) {
     .replaceAll("'", '&#039;');
 }
 
+const siteUrl = 'https://landing.acteomanagement.com';
+
+function emailLayout({
+  preheader,
+  eyebrow,
+  title,
+  intro,
+  content = '',
+  ctaLabel,
+  ctaUrl,
+  footerNote = 'Conseil, coaching et formation pour dirigeants et équipes.',
+}: {
+  preheader: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  content?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  footerNote?: string;
+}) {
+  const button = ctaLabel && ctaUrl
+    ? `<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin-top:28px">
+        <tr>
+          <td bgcolor="#4fb987" style="border-radius:6px">
+            <a href="${escapeHtml(ctaUrl)}" style="display:inline-block;padding:14px 22px;color:#071019;font-family:Arial,sans-serif;font-size:14px;font-weight:700;line-height:18px;text-decoration:none">${escapeHtml(ctaLabel)} &nbsp;→</a>
+          </td>
+        </tr>
+      </table>`
+    : '';
+
+  return `<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>${escapeHtml(title)}</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f4f7f9;color:#172033">
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent">${escapeHtml(preheader)}&#847;&zwnj;&nbsp;&#8199;&#65279;</div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f4f7f9">
+      <tr>
+        <td align="center" style="padding:28px 12px">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border:1px solid #e1e7ec;border-radius:8px;overflow:hidden">
+            <tr>
+              <td bgcolor="#071019" style="padding:24px 38px;border-bottom:4px solid #4fb987">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td valign="middle">
+                      <img src="${siteUrl}/logo-acteo.png" width="42" height="42" alt="Acteo Management" style="display:block;width:42px;height:42px;border:0">
+                    </td>
+                    <td align="right" valign="middle" style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;line-height:16px;letter-spacing:1.4px;color:#ffffff">ACTEO MANAGEMENT</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:42px 38px 38px">
+                <p style="margin:0 0 13px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;line-height:16px;letter-spacing:1.6px;color:#277655">${escapeHtml(eyebrow.toUpperCase())}</p>
+                <h1 style="margin:0 0 18px;font-family:Arial,sans-serif;font-size:32px;font-weight:600;line-height:38px;color:#071019;letter-spacing:0">${escapeHtml(title)}</h1>
+                <p style="margin:0;font-family:Arial,sans-serif;font-size:16px;line-height:26px;color:#52606d">${escapeHtml(intro)}</p>
+                ${content}
+                ${button}
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#0e1c2c" style="padding:26px 38px">
+                <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;line-height:18px;color:#ffffff">${escapeHtml(footerNote)}</p>
+                <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;line-height:20px;color:#aeb8c3">France · Espagne · International<br><a href="${siteUrl}" style="color:#7ed8ab;text-decoration:none">landing.acteomanagement.com</a></p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+function detailRow(label: string, value: string) {
+  return `<tr>
+    <td valign="top" style="width:112px;padding:8px 16px 8px 0;border-bottom:1px solid #e1e7ec;font-family:Arial,sans-serif;font-size:12px;font-weight:700;line-height:20px;color:#667085">${escapeHtml(label).toUpperCase()}</td>
+    <td valign="top" style="padding:8px 0;border-bottom:1px solid #e1e7ec;font-family:Arial,sans-serif;font-size:14px;line-height:20px;color:#172033">${escapeHtml(value)}</td>
+  </tr>`;
+}
+
+function detailTable(rows: string) {
+  return `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:26px;border-top:1px solid #e1e7ec">${rows}</table>`;
+}
+
+function messageBlock(message: string) {
+  return `<div style="margin-top:24px;padding:20px;background:#f4f7f9;border-left:3px solid #4fb987;border-radius:0 6px 6px 0">
+    <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;line-height:16px;letter-spacing:1.2px;color:#277655">MESSAGE</p>
+    <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;line-height:22px;color:#344054">${escapeHtml(message).replaceAll('\n', '<br>')}</p>
+  </div>`;
+}
+
 function getSecretKey() {
   const direct = Deno.env.get('SUPABASE_SECRET_KEY');
   if (direct) return direct;
@@ -133,13 +231,33 @@ Deno.serve(async (request) => {
           from,
           to: [email],
           subject: 'Bienvenue au Brief Acteo',
-          html: '<p>Bonjour,</p><p>Votre inscription au Brief Acteo est confirmée.</p><p>Vous recevrez chaque mois un point de vue court et concret sur le leadership, la performance et la transformation des organisations.</p><p>À bientôt,<br>Acteo Management</p>',
+          text: 'Bienvenue au Brief Acteo. Votre inscription est confirmée. Vous recevrez chaque mois un point de vue court et concret sur le leadership, la performance et la transformation des organisations.',
+          html: emailLayout({
+            preheader: 'Votre inscription au Brief Acteo est confirmée.',
+            eyebrow: 'Le Brief Acteo',
+            title: 'Bienvenue dans le Brief Acteo.',
+            intro: 'Votre inscription est confirmée. Une fois par mois, nous partageons une idée utile, issue du terrain, pour mieux décider et mieux faire agir.',
+            content: `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:28px;background:#f4f7f9;border-radius:6px">
+              <tr><td style="padding:20px 22px;font-family:Arial,sans-serif;font-size:14px;line-height:23px;color:#344054"><strong style="color:#071019">Court.</strong> Un format qui va à l’essentiel.<br><strong style="color:#071019">Concret.</strong> Des repères applicables sur le terrain.<br><strong style="color:#071019">Exigeant.</strong> Sans bruit, ni recettes toutes faites.</td></tr>
+            </table>`,
+            ctaLabel: 'Découvrir Acteo',
+            ctaUrl: siteUrl,
+          }),
         }),
         sendEmail({
           from,
           to: [contactTo],
           subject: 'Nouvelle inscription au Brief Acteo',
-          html: `<p>Nouvelle inscription à la newsletter :</p><p><strong>${escapeHtml(email)}</strong></p>`,
+          text: `Nouvelle inscription au Brief Acteo : ${email}`,
+          html: emailLayout({
+            preheader: `Nouvelle inscription : ${email}`,
+            eyebrow: 'Nouvelle inscription',
+            title: 'Le Brief Acteo accueille un nouvel abonné.',
+            intro: 'Une nouvelle inscription vient d’être enregistrée depuis la landing.',
+            content: detailTable(detailRow('Email', email)),
+            ctaLabel: 'Voir la landing',
+            ctaUrl: siteUrl,
+          }),
         }),
       ]);
 
@@ -170,14 +288,36 @@ Deno.serve(async (request) => {
           to: [contactTo],
           reply_to: email,
           subject: `Nouvelle demande Acteo — ${service}`,
-          html: `<p><strong>Nom :</strong> ${escapeHtml(name)}</p><p><strong>Email :</strong> ${escapeHtml(email)}</p><p><strong>Besoin :</strong> ${escapeHtml(service)}</p><p><strong>Message :</strong></p><p>${escapeHtml(message).replaceAll('\n', '<br>')}</p>`,
+          text: `Nouvelle demande Acteo\n\nNom : ${name}\nEmail : ${email}\nBesoin : ${service}\n\nMessage :\n${message}`,
+          html: emailLayout({
+            preheader: `${name} souhaite échanger au sujet de ${service}.`,
+            eyebrow: 'Nouvelle demande',
+            title: 'Un nouveau besoin à qualifier.',
+            intro: 'Une demande vient d’arriver depuis la landing Acteo. Vous pouvez répondre directement à cet email.',
+            content: detailTable([
+              detailRow('Nom', name),
+              detailRow('Email', email),
+              detailRow('Besoin', service),
+            ].join('')) + messageBlock(message),
+            ctaLabel: `Répondre à ${name}`,
+            ctaUrl: `mailto:${email}`,
+          }),
         }),
         sendEmail({
           from,
           to: [email],
           reply_to: contactTo,
           subject: 'Nous avons bien reçu votre demande',
-          html: `<p>Bonjour ${escapeHtml(name)},</p><p>Merci pour votre message. Nous l’avons bien reçu et nous revenons vers vous rapidement pour identifier le format le plus utile.</p><p>À bientôt,<br>Acteo Management</p>`,
+          text: `Bonjour ${name},\n\nMerci pour votre message. Nous l’avons bien reçu et nous revenons vers vous rapidement pour identifier le format le plus utile.\n\nVotre besoin : ${service}\n\nÀ bientôt,\nActeo Management`,
+          html: emailLayout({
+            preheader: 'Votre demande a bien été transmise à l’équipe Acteo.',
+            eyebrow: 'Demande reçue',
+            title: `Merci, ${name}.`,
+            intro: 'Votre message a bien été transmis à l’équipe. Nous revenons vers vous rapidement pour comprendre votre contexte et identifier le format le plus utile.',
+            content: detailTable(detailRow('Votre besoin', service)) + messageBlock(message),
+            ctaLabel: 'Découvrir les formations',
+            ctaUrl: `${siteUrl}/#courses`,
+          }),
         }),
       ]);
 
