@@ -1114,6 +1114,28 @@ button.primary-action {
   line-height: 1.55;
 }
 
+.form-error {
+  margin: 0;
+  color: #a83232;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.form-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+}
+
+.lead-form button:disabled,
+.newsletter-form button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
 .newsletter-backdrop {
   position: fixed;
   inset: 0;

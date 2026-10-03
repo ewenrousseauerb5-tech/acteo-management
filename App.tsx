@@ -25,6 +25,9 @@ import LinkedInDashboard from './components/LinkedInDashboard';
 import { Page } from './types';
 
 const bookingUrl = 'https://laurentrousseau.youcanbook.me';
+const formsEndpoint = 'https://vgdwofduvgawzkhannld.supabase.co/functions/v1/acteo-forms';
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const formations = [
   {
@@ -136,9 +139,9 @@ function App() {
   };
 
   const [currentPage, setCurrentPage] = useState<Page>(getInitialPage);
-  const [sent, setSent] = useState(false);
+  const [contactStatus, setContactStatus] = useState<FormStatus>('idle');
   const [newsletterOpen, setNewsletterOpen] = useState(false);
-  const [newsletterSent, setNewsletterSent] = useState(false);
+  const [newsletterStatus, setNewsletterStatus] = useState<FormStatus>('idle');
   const [courseStep, setCourseStep] = useState(0);
   const [activeReview, setActiveReview] = useState(0);
   const newsletterTriggered = useRef(false);
@@ -203,14 +206,57 @@ function App() {
     return () => window.clearInterval(timer);
   }, [currentPage]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSent(true);
+  const submitForm = async (payload: Record<string, string>) => {
+    const response = await fetch(formsEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error('Form submission failed');
+    }
   };
 
-  const handleNewsletterSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setNewsletterSent(true);
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    setContactStatus('submitting');
+
+    try {
+      await submitForm({
+        type: 'contact',
+        name: String(data.get('name') ?? ''),
+        email: String(data.get('email') ?? ''),
+        service: String(data.get('service') ?? ''),
+        message: String(data.get('message') ?? ''),
+        website: String(data.get('website') ?? ''),
+      });
+      form.reset();
+      setContactStatus('success');
+    } catch {
+      setContactStatus('error');
+    }
+  };
+
+  const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    setNewsletterStatus('submitting');
+
+    try {
+      await submitForm({
+        type: 'newsletter',
+        email: String(data.get('email') ?? ''),
+        website: String(data.get('website') ?? ''),
+      });
+      form.reset();
+      setNewsletterStatus('success');
+    } catch {
+      setNewsletterStatus('error');
+    }
   };
 
   if (currentPage === 'linkedin') {
@@ -500,6 +546,10 @@ function App() {
           </div>
 
           <form className="lead-form" onSubmit={handleSubmit}>
+            <label className="form-honeypot" aria-hidden="true">
+              Site web
+              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </label>
             <label>
               Nom
               <input name="name" type="text" placeholder="Votre nom" required />
@@ -529,14 +579,18 @@ function App() {
                 required
               />
             </label>
-            <button type="submit">
-              Échanger sur mon besoin
+            <button type="submit" disabled={contactStatus === 'submitting'}>
+              {contactStatus === 'submitting' ? 'Envoi en cours…' : 'Échanger sur mon besoin'}
               <ArrowUpRight aria-hidden="true" size={18} />
             </button>
-            {sent && (
+            {contactStatus === 'success' && (
               <p className="form-success" role="status">
-                Merci. Votre demande est prête à être transmise. La connexion à votre outil email
-                ou CRM sera activée lors de la mise en production du formulaire.
+                Merci. Votre demande a bien été envoyée. Nous revenons vers vous rapidement.
+              </p>
+            )}
+            {contactStatus === 'error' && (
+              <p className="form-error" role="alert">
+                L’envoi n’a pas abouti. Réessayez ou écrivez-nous à d.bessot@acteomanagement.com.
               </p>
             )}
           </form>
@@ -576,7 +630,7 @@ function App() {
               Chaque mois, un point de vue court sur le leadership, la performance et la
               transformation des organisations. Sans bruit, sans théorie inutile.
             </p>
-            {newsletterSent ? (
+            {newsletterStatus === 'success' ? (
               <div className="newsletter-success" role="status">
                 <CheckCircle2 aria-hidden="true" size={22} />
                 <div>
@@ -586,6 +640,14 @@ function App() {
               </div>
             ) : (
               <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
+                <input
+                  className="form-honeypot"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <label htmlFor="newsletter-email">Email professionnel</label>
                 <div>
                   <input
@@ -597,12 +659,17 @@ function App() {
                     required
                     autoFocus
                   />
-                  <button type="submit">
-                    S’inscrire
+                  <button type="submit" disabled={newsletterStatus === 'submitting'}>
+                    {newsletterStatus === 'submitting' ? 'Inscription…' : 'S’inscrire'}
                     <ArrowUpRight aria-hidden="true" size={18} />
                   </button>
                 </div>
                 <small>Un email par mois. Désinscription en un clic.</small>
+                {newsletterStatus === 'error' && (
+                  <p className="form-error" role="alert">
+                    L’inscription n’a pas abouti. Vérifiez votre adresse et réessayez.
+                  </p>
+                )}
               </form>
             )}
           </section>
