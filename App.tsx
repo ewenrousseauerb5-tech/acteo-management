@@ -5,6 +5,7 @@ import Overview from './components/Overview';
 import Services from './components/Services';
 import Quote from './components/Quote';
 import Approach from './components/Approach';
+import Method from './components/Method';
 import About from './components/About';
 import LinkedInDashboard from './components/LinkedInDashboard';
 import Footer from './components/Footer';
@@ -33,6 +34,7 @@ function App() {
             <Hero />
             <Overview />
             <Services />
+            <Method />
             <Quote />
             <Approach />
           </>
