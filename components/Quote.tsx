@@ -12,8 +12,8 @@ const Quote: React.FC = () => {
       <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
         <QuoteIcon className="w-16 h-16 text-acteo/30 mx-auto mb-8" />
         
-        <blockquote className="text-3xl md:text-5xl font-serif italic text-white leading-tight max-w-5xl mx-auto mb-10">
-          "Beyond services, we build trusted relationships that drive meaningful change."
+        <blockquote lang="fr" className="text-3xl md:text-5xl font-serif italic text-white leading-tight max-w-5xl mx-auto mb-10">
+          Chez Acteo, la formation se termine quand vous avez commencé à l’utiliser.
         </blockquote>
         
         <div className="w-24 h-1 bg-acteo mx-auto rounded-full"></div>
