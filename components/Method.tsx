@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import './Method.css';
 
 const steps = [
-  { title: 'On comprend', description: 'Terrain · enjeux · parties prenantes' },
-  { title: 'On décide', description: 'Arbitrages · plan · engagement' },
-  { title: 'On applique', description: 'Mise en pratique · actions · accompagnement' },
-  { title: 'On progresse', description: 'Rituels · mesure · autonomie' },
+  { title: 'On comprend', description: 'Clarifier votre situation et vos enjeux.' },
+  { title: 'On décide', description: 'Choisir ensemble les actions prioritaires.' },
+  { title: 'On applique', description: 'Mettre les acquis en pratique sur le terrain.' },
+  { title: 'On progresse', description: 'Mesurer les progrès et renforcer l’autonomie.' },
 ];
 
 const Method: React.FC = () => {
