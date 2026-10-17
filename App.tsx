@@ -20,6 +20,7 @@ import {
   X,
 } from 'lucide-react';
 import Navbar from './components/Navbar';
+import Method from './components/Method';
 import Footer from './components/Footer';
 import LinkedInDashboard from './components/LinkedInDashboard';
 import { Page } from './types';
@@ -420,6 +421,8 @@ function App() {
             <p className="course-closing">La formation ne s’arrête pas quand la session se termine.</p>
           </div>
         </section>
+
+        <Method />
 
         <section id="about" className="section-block about-block">
           <div className="about-visual">
