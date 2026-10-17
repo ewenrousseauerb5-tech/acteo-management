@@ -574,8 +574,9 @@ button.primary-action {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+  align-items: start;
 }
 
 .review-card,
@@ -588,21 +589,14 @@ button.primary-action {
 }
 
 .service-card {
-  display: flex;
-  min-height: 430px;
-  flex-direction: column;
-  padding: clamp(22px, 2.2vw, 30px);
   color: var(--white);
   border-radius: 6px;
   background: var(--ink);
+  transition: grid-column 260ms ease, background 260ms ease;
 }
 
-.service-card:nth-child(-n + 3) {
+.service-card.is-expanded {
   grid-column: span 2;
-}
-
-.service-card:nth-child(n + 4) {
-  grid-column: span 3;
 }
 
 .service-card:nth-child(2) {
@@ -627,9 +621,9 @@ button.primary-action {
 .service-icon {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 34px;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
   color: currentColor;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
@@ -641,7 +635,35 @@ button.primary-action {
   background: rgba(7, 16, 25, 0.08);
 }
 
-.service-card > span {
+.service-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 132px;
+  padding: 24px;
+  color: inherit;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.service-summary:focus-visible {
+  outline: 2px solid var(--green-2);
+  outline-offset: -5px;
+}
+
+.service-summary-copy {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.service-eyebrow {
   color: currentColor;
   opacity: 0.64;
   font-size: 0.75rem;
@@ -649,25 +671,71 @@ button.primary-action {
   text-transform: uppercase;
 }
 
-.service-card h3 {
-  margin: 10px 0 12px;
-  max-width: 420px;
+.service-title {
   color: currentColor;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-size: clamp(1.08rem, 1.5vw, 1.38rem);
+  font-weight: 700;
   line-height: 1.2;
 }
 
-.service-card p {
-  max-width: 470px;
+.service-toggle {
+  flex: 0 0 auto;
+  opacity: 0.68;
+  transition: transform 220ms ease;
+}
+
+.service-card.is-expanded .service-toggle {
+  transform: rotate(90deg);
+}
+
+.service-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition: grid-template-rows 260ms ease, opacity 180ms ease;
+}
+
+.service-detail > * {
+  min-height: 0;
+}
+
+.service-card.is-expanded .service-detail {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.service-detail > div {
+  overflow: hidden;
+  padding: 0 24px;
+}
+
+.service-card.is-expanded .service-detail > div {
+  padding-bottom: 24px;
+}
+
+.service-detail p {
   margin: 0;
   color: currentColor;
   opacity: 0.76;
   line-height: 1.55;
 }
 
-.service-duration {
-  display: block;
-  margin-top: 20px;
+.service-meta {
+  display: grid;
+  gap: 15px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.service-card:nth-child(2) .service-meta,
+.service-card:nth-child(3) .service-meta,
+.service-card:nth-child(5) .service-meta {
+  border-color: rgba(7, 16, 25, 0.14);
+}
+
+.service-meta > strong {
   color: currentColor;
   font-size: 0.86rem;
   line-height: 1.5;
@@ -677,8 +745,6 @@ button.primary-action {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin-top: auto;
-  padding-top: 30px;
 }
 
 .service-date svg {
@@ -688,22 +754,19 @@ button.primary-action {
   opacity: 0.72;
 }
 
-.service-date div {
+.service-date span {
   display: grid;
   gap: 3px;
-}
-
-.service-date strong {
-  color: currentColor;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-}
-
-.service-date span {
   color: currentColor;
   opacity: 0.72;
   font-size: 0.82rem;
   line-height: 1.45;
+}
+
+.service-date b {
+  color: currentColor;
+  font-size: 0.78rem;
+  text-transform: uppercase;
 }
 
 .service-link {
@@ -711,7 +774,7 @@ button.primary-action {
   align-items: center;
   gap: 7px;
   width: fit-content;
-  margin-top: 18px;
+  margin-top: 22px;
   color: currentColor;
   font-size: 0.86rem;
   font-weight: 800;

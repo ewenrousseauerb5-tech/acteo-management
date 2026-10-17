@@ -145,6 +145,7 @@ function App() {
   const [newsletterStatus, setNewsletterStatus] = useState<FormStatus>('idle');
   const [courseStep, setCourseStep] = useState(0);
   const [activeReview, setActiveReview] = useState(0);
+  const [activeFormation, setActiveFormation] = useState<number | null>(null);
   const newsletterTriggered = useRef(false);
 
   useEffect(() => {
@@ -339,28 +340,53 @@ function App() {
           </div>
 
           <div className="services-grid">
-            {formations.map((formation) => (
-              <article className="service-card" key={formation.title}>
-                <div className="service-icon">
-                  <formation.icon aria-hidden="true" size={24} />
-                </div>
-                <span>{formation.eyebrow}</span>
-                <h3>{formation.title}</h3>
-                <p>{formation.description}</p>
-                <strong className="service-duration">{formation.duration}</strong>
-                <div className="service-date">
-                  <CalendarDays aria-hidden="true" size={17} />
-                  <div>
-                    <strong>Prochaine session</strong>
-                    <span>{formation.nextDate}<br />{formation.time}</span>
+            {formations.map((formation, index) => {
+              const isExpanded = activeFormation === index;
+
+              return (
+                <article className={`service-card ${isExpanded ? 'is-expanded' : ''}`} key={formation.title}>
+                  <button
+                    type="button"
+                    className="service-summary"
+                    aria-expanded={isExpanded}
+                    aria-controls={`formation-detail-${index}`}
+                    onClick={() => setActiveFormation(isExpanded ? null : index)}
+                  >
+                    <span className="service-icon">
+                      <formation.icon aria-hidden="true" size={22} />
+                    </span>
+                    <span className="service-summary-copy">
+                      <span className="service-eyebrow">{formation.eyebrow}</span>
+                      <span className="service-title">{formation.title}</span>
+                    </span>
+                    <ChevronRight className="service-toggle" aria-hidden="true" size={20} />
+                  </button>
+                  <div
+                    className="service-detail"
+                    id={`formation-detail-${index}`}
+                    aria-hidden={!isExpanded}
+                  >
+                    <div className="service-detail-inner">
+                      <p>{formation.description}</p>
+                      <div className="service-meta">
+                        <strong>{formation.duration}</strong>
+                        <div className="service-date">
+                          <CalendarDays aria-hidden="true" size={17} />
+                          <span>
+                            <b>Prochaine session</b>
+                            {formation.nextDate} · {formation.time}
+                          </span>
+                        </div>
+                      </div>
+                      <a href="#contact" className="service-link">
+                        Échanger sur cette formation
+                        <ArrowUpRight aria-hidden="true" size={16} />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <a href="#contact" className="service-link">
-                  En parler
-                  <ArrowUpRight aria-hidden="true" size={16} />
-                </a>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
           <p className="session-note">
             Nous privilégions les petits groupes pour favoriser les échanges et la mise en
