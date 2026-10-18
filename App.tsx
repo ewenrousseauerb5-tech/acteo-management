@@ -385,7 +385,7 @@ function App() {
           <div className="course-intro">
             <span className="section-kicker">Comment ça marche</span>
             <h2>Quelques heures pour comprendre. 15 jours pour expérimenter.</h2>
-            <div className="course-motion" aria-label="Méthode Acteo : comprendre, aligner, décider et ancrer">
+            <div className="course-motion" aria-label="Méthode Acteo : comprendre, appliquer, ancrer à J+15 et optimiser">
               <div className="motion-heading">
                 <span>Méthode Acteo</span>
                 <strong>De la complexité à l’action</strong>
@@ -396,9 +396,9 @@ function App() {
                 </span>
                 {[
                   ['01', 'Comprendre', 'Terrain · enjeux · parties prenantes'],
-                  ['02', 'Aligner', 'Vision · rôles · priorités'],
-                  ['03', 'Décider', 'Arbitrages · plan · engagement'],
-                  ['04', 'Ancrer', 'Rituels · mesure · autonomie'],
+                  ['02', 'Appliquer', 'Mise en pratique sur le terrain'],
+                  ['03', 'Ancrer', 'Réunion de suivi à J+15'],
+                  ['04', 'Optimiser', 'Retours · ajustements · progrès'],
                 ].map(([number, title, detail], index) => (
                   <div className={`motion-step ${courseStep === index ? 'is-active' : ''}`} key={number}>
                     <b>{number}</b>
