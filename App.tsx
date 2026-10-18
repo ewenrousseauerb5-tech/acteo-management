@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ArrowUpRight,
   ArrowLeft,
@@ -146,20 +146,6 @@ function App() {
   const [courseStep, setCourseStep] = useState(0);
   const [activeReview, setActiveReview] = useState(0);
   const [activeFormation, setActiveFormation] = useState<number | null>(null);
-  const newsletterTriggered = useRef(false);
-
-  useEffect(() => {
-    if (currentPage !== 'home') return;
-    const handleScroll = () => {
-      if (newsletterTriggered.current || window.scrollY < window.innerHeight * 0.72) return;
-      newsletterTriggered.current = true;
-      setNewsletterOpen(true);
-      window.removeEventListener('scroll', handleScroll);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage]);
-
   useEffect(() => {
     if (!newsletterOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
