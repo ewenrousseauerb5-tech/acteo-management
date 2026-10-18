@@ -299,8 +299,8 @@ function App() {
                   <i />
                 </span>
                 {[
-                  ['01', 'Comprendre', 'Terrain · enjeux · parties prenantes'],
-                  ['02', 'Appliquer', 'Mise en pratique sur le terrain'],
+                  ['01', 'Comprendre', 'Concepts · méthodes · situations réelles'],
+                  ['02', 'Appliquer', 'Outils · expérimentation terrain'],
                   ['03', 'Ancrer', 'Réunion de suivi à J+15'],
                   ['04', 'Optimiser', 'Retours · ajustements · progrès'],
                 ].map(([number, title, detail], index) => (
@@ -319,22 +319,28 @@ function App() {
             <div>
               <GraduationCap aria-hidden="true" />
               <span className="course-date">J0</span>
-              <h3>Se former</h3>
-              <p>Concepts, méthodes, outils et cas pratiques. Préparer son plan d’action.</p>
+              <h3>Comprendre</h3>
+              <p>Acquérir les concepts, les méthodes et les outils à partir de vos situations réelles.</p>
             </div>
             <div>
               <Target aria-hidden="true" />
               <span className="course-date">J+1 à J+14</span>
-              <h3>Mettre en pratique</h3>
-              <p>Tester les outils dans sa situation professionnelle réelle.</p>
+              <h3>Appliquer</h3>
+              <p>Expérimenter les outils sur le terrain et mettre votre plan d’action en pratique.</p>
+            </div>
+            <div>
+              <UsersRound aria-hidden="true" />
+              <span className="course-date">J+15 · Réunion de suivi</span>
+              <h3>Ancrer</h3>
+              <p>Une réunion à 15 jours pour partager vos retours d’expérience, lever les blocages et consolider les acquis.</p>
             </div>
             <div>
               <ClipboardCheck aria-hidden="true" />
-              <span className="course-date">J+15</span>
-              <h3>Suivre et améliorer</h3>
-              <p>Partager, résoudre les difficultés, ajuster et repartir avec la prochaine action.</p>
+              <span className="course-date">Après J+15</span>
+              <h3>Optimiser</h3>
+              <p>Ajuster vos pratiques à partir des retours terrain et poursuivre les progrès dans la durée.</p>
             </div>
-            <p className="course-closing">La formation ne s’arrête pas quand la session se termine.</p>
+            <p className="course-closing">Comprendre → Appliquer → Ancrer → Optimiser</p>
           </div>
         </section>
 

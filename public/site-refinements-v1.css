@@ -1,0 +1,10 @@
+.about-block .about-visual.trainer-portraits {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(280px, 100%);
+  justify-self: center;
+  gap: 28px;
+}
+.about-block .trainer-portraits figure { width: 100%; }
+@media (max-width: 760px) {
+  .about-block .about-visual.trainer-portraits { width: min(300px, 100%); gap: 26px; }
+}
