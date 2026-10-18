@@ -1,4 +1,5 @@
 const catalogueUrl = new URL('./programmes-formations.json', import.meta.url);
+catalogueUrl.searchParams.set('v', '20261018-final-dates');
 const svg = (name) => {
   const paths = {
     leadership: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
@@ -151,6 +152,9 @@ function mountCatalogue(courses) {
       button.setAttribute('aria-label', `Voir le programme : ${course.title}`);
       button.setAttribute('aria-haspopup', 'dialog');
       button.append(svg('arrow'));
+      card.addEventListener('click', (event) => {
+        if (!event.target.closest('button, a')) openProgramme(course, button);
+      });
       card.append(top, el('p', 'programme-category', course.category), title, el('p', 'programme-teaser', course.teaser), duration, button);
       return card;
     }));
