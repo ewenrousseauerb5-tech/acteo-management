@@ -556,7 +556,7 @@ function App() {
 
         <section className="belief-band" aria-label="La promesse Acteo">
           <p>Une formation ne devrait pas se terminer par « Merci, au revoir ».</p>
-          <h2>La formation se termine quand vous avez commencé à l’utiliser.</h2>
+          <h2>Chez Acteo, la formation se termine quand vous avez commencé à l’utiliser.</h2>
           <span>Formation → application terrain → retour d’expérience à J+15</span>
         </section>
 
