@@ -118,3 +118,6 @@
   .programme-card,.programme-card-button svg { transition:none; }
   .programme-card:hover,.programme-card-button:hover svg { transform:none; }
 }
+
+/* Retain the original method timeline on older published bundles. */
+main > .acteo-method { display: none !important; }
