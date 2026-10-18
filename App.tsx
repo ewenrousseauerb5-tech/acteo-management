@@ -437,8 +437,15 @@ function App() {
         <Method />
 
         <section id="about" className="section-block about-block">
-          <div className="about-visual">
-            <img src="/PHOTO-2025-10-20-08-34-27.jpg" alt="Laurent Rousseau et Delphine Bessot" />
+          <div className="about-visual trainer-portraits">
+            <figure>
+              <img src="/delphine-bessot.jpg" alt="Delphine Bessot" width={1122} height={1402} loading="lazy" />
+              <figcaption>Delphine Bessot</figcaption>
+            </figure>
+            <figure>
+              <img src="/laurent-rousseau.jpg" alt="Laurent Rousseau" width={1122} height={1402} loading="lazy" />
+              <figcaption>Laurent Rousseau</figcaption>
+            </figure>
           </div>
           <div className="about-copy">
             <span className="section-kicker">Les formateurs</span>

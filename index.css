@@ -1003,6 +1003,32 @@ button.primary-action {
   object-fit: cover;
 }
 
+.about-visual.trainer-portraits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  overflow: visible;
+  background: transparent;
+}
+
+.trainer-portraits figure {
+  margin: 0;
+}
+
+.about-visual.trainer-portraits img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.trainer-portraits figcaption {
+  padding-top: 14px;
+  color: var(--ink);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-weight: 650;
+}
+
 .profile-list {
   display: grid;
   gap: 0;
