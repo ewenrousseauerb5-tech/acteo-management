@@ -1,0 +1,384 @@
+[
+  {
+    "id": "leadership",
+    "category": "LEADERSHIP",
+    "title": "De manager à leader coach",
+    "teaser": "Poser un cadre, responsabiliser et mettre ses collaborateurs en action.",
+    "duration": "1 jour + 1 h de suivi à J+15",
+    "intro": "Arrêtez de donner toutes les réponses. Posez un cadre clair, faites grandir vos collaborateurs et mettez-les en action.",
+    "audience": "managers récemment promus, encadrants de proximité, chefs de projet qui animent une équipe.",
+    "objectives": [
+      "poser un cadre clair : attentes, rôles, règles d'équipe",
+      "passer de « donner la solution » à « faire trouver la solution »",
+      "donner un feedback qui fait progresser, en reconnaissance comme en recadrage",
+      "conduire un entretien de mise en action : une décision, une action sous sept jours, une mesure"
+    ],
+    "method": null,
+    "schedule": [
+      {
+        "time": "8h30",
+        "title": "Vos situations",
+        "description": "Chaque participant apporte une situation de management réelle, travaillée toute la journée."
+      },
+      {
+        "time": "9h00",
+        "title": "Manager ou leader coach : ce qui change",
+        "description": "Autodiagnostic de son style, ce que l'on garde, ce que l'on lâche."
+      },
+      {
+        "time": "10h00",
+        "title": "Poser le cadre",
+        "description": "Attentes, rôles et règles d'équipe. Chacun rédige la charte de son équipe."
+      },
+      {
+        "time": "11h00",
+        "title": "La posture de coach",
+        "description": "Questions ouvertes, écoute, silence, reformulation. Pratique en trinômes."
+      },
+      {
+        "time": "12h30",
+        "title": "Déjeuner",
+        "description": ""
+      },
+      {
+        "time": "13h30",
+        "title": "Le feedback qui fait progresser",
+        "description": "Faits, impact, attente. Jeux de rôle sur vos cas."
+      },
+      {
+        "time": "14h45",
+        "title": "Ce qui fait agir",
+        "description": "Les leviers de la motivation, et comment les adapter à chaque collaborateur."
+      },
+      {
+        "time": "15h30",
+        "title": "L'entretien de mise en action",
+        "description": "Une décision, une action sous sept jours, une mesure. Simulation filmée ou observée."
+      },
+      {
+        "time": "16h15",
+        "title": "Votre engagement",
+        "description": "Chacun choisit l'entretien qu'il mènera avant le suivi."
+      }
+    ],
+    "programmeNote": null,
+    "followUp": "chacun raconte son entretien, ce qui a marché, ce qui a coincé. On ajuste ensemble.",
+    "followUpDate": null,
+    "takeaways": "un modèle de charte d'équipe, une fiche feedback, la trame de l'entretien de mise en action, votre plan d'action.",
+    "session": "20 novembre 2026",
+    "hours": "8h30–12h30 · 13h30–16h30",
+    "format": "À distance",
+    "group": "6 à 12 participants prévus, effectif à confirmer",
+    "languages": "Français ; espagnol et anglais sur demande",
+    "price": "Sur demande",
+    "trainer": "Votre formateur : Laurent Rousseau, associé Acteo Management, ancien Directeur Qualité PSA. Il accompagne dirigeants et managers vers leurs objectifs depuis dix ans. Certifié en neurosciences de la motivation (INA Paris).",
+    "trainerName": "Laurent Rousseau",
+    "trainerPhoto": "/laurent-rousseau.jpg",
+    "moduleNote": null
+  },
+  {
+    "id": "communication",
+    "category": "COMMUNICATION",
+    "title": "Adapter sa communication à chaque profil",
+    "teaser": "Quatre styles comportementaux pour parler à chacun avec plus d'impact.",
+    "duration": "2 h + 1 h de suivi à J+15",
+    "intro": "Le même message ne passe pas de la même façon chez tout le monde. Apprenez à repérer le style de votre interlocuteur et à lui parler dans sa langue.",
+    "audience": "managers, chefs de projet, commerciaux, fonctions support, toute personne qui doit convaincre ou faire adhérer.",
+    "objectives": [
+      "reconnaître votre propre style et ses angles morts",
+      "repérer en quelques minutes le style de votre interlocuteur : mots, rythme, voix, gestes",
+      "ajuster votre rythme, votre vocabulaire et le niveau de détail à chaque profil",
+      "préparer un échange important avec une personne précise"
+    ],
+    "method": null,
+    "schedule": [
+      {
+        "time": "9h00",
+        "title": "Le message qui n'est pas passé",
+        "description": "Chacun partage une situation réelle où il ne s'est pas fait comprendre."
+      },
+      {
+        "time": "9h10",
+        "title": "Les quatre styles comportementaux",
+        "description": "Rapide ou posé, orienté tâche ou relation. Autopositionnement."
+      },
+      {
+        "time": "9h35",
+        "title": "Repérer le style de l'autre",
+        "description": "Les indices qui ne trompent pas : mots, rythme, voix, posture, micro-expressions."
+      },
+      {
+        "time": "10h00",
+        "title": "Adapter son message",
+        "description": "Un même message réécrit pour les quatre profils, en sous-groupes."
+      },
+      {
+        "time": "10h35",
+        "title": "Sur vos cas",
+        "description": "Mise en situation avec un interlocuteur « difficile » choisi par le groupe."
+      },
+      {
+        "time": "10h55",
+        "title": "Votre engagement",
+        "description": "Une personne, un échange à tester avant le suivi."
+      }
+    ],
+    "programmeNote": null,
+    "followUp": "retours sur les échanges testés, profils difficiles à lire, ajustements.",
+    "followUpDate": null,
+    "takeaways": "la carte des quatre styles, une grille de repérage rapide, vos phrases d'ouverture par profil.",
+    "session": "23 octobre 2026",
+    "hours": "9h00–11h00",
+    "format": "À distance",
+    "group": "6 à 12 participants prévus, effectif à confirmer",
+    "languages": "Français ; espagnol et anglais sur demande",
+    "price": "Sur demande",
+    "trainer": "Votre formateur : Laurent Rousseau, associé Acteo Management. Conférencier et animateur de groupes, il forme les équipes avant-vente d'éditeurs de logiciels B2B à l'impact de leurs rendez-vous.",
+    "trainerName": "Laurent Rousseau",
+    "trainerPhoto": "/laurent-rousseau.jpg",
+    "moduleNote": null
+  },
+  {
+    "id": "organisation",
+    "category": "ORGANISATION",
+    "title": "Faire avancer sans lien hiérarchique",
+    "teaser": "Mobiliser et obtenir des engagements en projet, en processus ou en matriciel.",
+    "duration": "1 jour + 1 h de suivi à J+15",
+    "intro": "Vous devez obtenir des résultats de personnes qui ne dépendent pas de vous. Clarifiez les rôles, mobilisez et obtenez des engagements tenus.",
+    "audience": "chefs de projet, pilotes de processus, managers en organisation matricielle, fonctions support (qualité, RH, finance, achats).",
+    "objectives": [
+      "clarifier qui décide, qui fait et qui est consulté",
+      "cartographier vos interlocuteurs selon leur influence et leur adhésion",
+      "formuler une demande qui donne envie de dire oui",
+      "négocier priorités et ressources avec d'autres managers",
+      "suivre les engagements sans tomber dans la relance ou le conflit"
+    ],
+    "method": null,
+    "schedule": [
+      {
+        "time": "8h30",
+        "title": "Vos situations",
+        "description": "Chacun liste les personnes dont il dépend sans avoir autorité sur elles."
+      },
+      {
+        "time": "9h00",
+        "title": "Projet, processus, matriciel",
+        "description": "Ce qui change quand on ne décide pas seul. Les pièges classiques."
+      },
+      {
+        "time": "9h45",
+        "title": "Clarifier les rôles",
+        "description": "Matrice RACI, interfaces, points de décision. Exercice sur un projet réel."
+      },
+      {
+        "time": "11h00",
+        "title": "La carte des parties prenantes",
+        "description": "Influence × adhésion : alliés, indécis, opposants. Une stratégie pour chacun."
+      },
+      {
+        "time": "12h30",
+        "title": "Déjeuner",
+        "description": ""
+      },
+      {
+        "time": "13h30",
+        "title": "Mobiliser sans imposer",
+        "description": "Donner du sens, partir de l'intérêt de l'autre, faire une demande claire."
+      },
+      {
+        "time": "14h30",
+        "title": "Négocier priorités et ressources",
+        "description": "Deux managers, une même ressource : préparer, proposer, ne rien céder sans contrepartie."
+      },
+      {
+        "time": "15h30",
+        "title": "Obtenir et suivre les engagements",
+        "description": "Qui, quoi, quand. Rituels de suivi courts, relance sans tension."
+      },
+      {
+        "time": "16h15",
+        "title": "Votre engagement",
+        "description": "Une interface à clarifier ou une demande à faire avant le suivi."
+      }
+    ],
+    "programmeNote": null,
+    "followUp": "ce que chacun a clarifié ou obtenu, les résistances rencontrées, les ajustements.",
+    "followUpDate": null,
+    "takeaways": "un modèle de RACI, la carte influence × adhésion, une trame de demande d'engagement.",
+    "session": "30 octobre 2026",
+    "hours": "8h30–12h30 · 13h30–16h30",
+    "format": "À distance",
+    "group": "6 à 12 participants prévus, effectif à confirmer",
+    "languages": "Français ; espagnol et anglais sur demande",
+    "price": "Sur demande",
+    "trainer": "Vos formateurs : Laurent Rousseau et/ou Delphine Bessot, selon la session. Laurent a dirigé la qualité d'un programme automobile de 400 fournisseurs et 600 personnes. Delphine a dirigé les opérations d'une PME et conduit des projets en groupement à l'international.",
+    "trainerName": "Équipe Acteo",
+    "trainerPhoto": "/acteo-portrait.png",
+    "moduleNote": null
+  },
+  {
+    "id": "efficacite",
+    "category": "EFFICACITÉ",
+    "title": "Résoudre durablement les problèmes",
+    "teaser": "Trouver la vraie cause, agir juste, éviter la récidive.",
+    "duration": "1 jour + 1 h de suivi à J+15",
+    "intro": "Le même problème revient ? C'est qu'on a traité le symptôme. Une méthode en six étapes, éprouvée sur plus de 10 000 problèmes résolus, pour trouver la vraie cause et ne plus y revenir.",
+    "audience": "managers, chefs de projet, responsables qualité et production, équipes support. Toute personne qui traite des dysfonctionnements récurrents.",
+    "objectives": [
+      "décrire un problème avec des faits, pas des opinions",
+      "remonter à la cause racine et la vérifier",
+      "choisir les bonnes actions et mesurer leur efficacité",
+      "verrouiller la solution pour éviter la récidive",
+      "utiliser les outils clés : QQOQCP, Ishikawa, 5 pourquoi, 8D, AMDEC"
+    ],
+    "method": "La méthode SORAVV : Situer, Observer, Réfléchir, Adapter, Valider, Verrouiller. Créée et enseignée par Laurent Rousseau, elle structure toute la journée.",
+    "schedule": [
+      {
+        "time": "8h30",
+        "title": "Vos problèmes",
+        "description": "Chacun apporte un problème réel et récurrent, traité en binôme toute la journée."
+      },
+      {
+        "time": "9h00",
+        "title": "Pourquoi les problèmes reviennent",
+        "description": "Symptôme ou cause, curatif ou correctif. Ce que coûte un problème mal résolu."
+      },
+      {
+        "time": "9h30",
+        "title": "Situer et Observer",
+        "description": "Décrire le problème (QQOQCP), séparer faits et opinions, aller voir sur le terrain."
+      },
+      {
+        "time": "10h45",
+        "title": "Réfléchir",
+        "description": "Ishikawa et 5 pourquoi pour remonter à la cause racine, puis la vérifier."
+      },
+      {
+        "time": "12h30",
+        "title": "Déjeuner",
+        "description": ""
+      },
+      {
+        "time": "13h30",
+        "title": "Adapter",
+        "description": "Choisir et prioriser les actions. Qui, quoi, quand."
+      },
+      {
+        "time": "14h30",
+        "title": "Valider",
+        "description": "Prouver que l'action a marché : indicateur, seuil, durée d'observation."
+      },
+      {
+        "time": "15h15",
+        "title": "Verrouiller",
+        "description": "Standardiser, partager, étendre aux cas similaires. Les repères 8D et AMDEC pour anticiper."
+      },
+      {
+        "time": "16h00",
+        "title": "Restitution",
+        "description": "Chaque binôme présente son problème en trois minutes."
+      },
+      {
+        "time": "16h20",
+        "title": "Votre engagement",
+        "description": "Le problème que vous mènerez au bout avant le suivi."
+      }
+    ],
+    "programmeNote": null,
+    "followUp": "où en est chaque problème, les causes qui résistent, les actions à valider.",
+    "followUpDate": null,
+    "takeaways": "la fiche SORAVV prête à l'emploi, les trames Ishikawa et 5 pourquoi, votre problème analysé.",
+    "session": "6 novembre 2026",
+    "hours": "8h30–12h30 · 13h30–16h30",
+    "format": "À distance",
+    "group": "6 à 12 participants prévus, effectif à confirmer",
+    "languages": "Français ; espagnol et anglais sur demande",
+    "price": "Sur demande",
+    "trainer": "Votre formateur : Laurent Rousseau, 18 ans chez PSA, ancien Directeur Qualité du programme C4 Picasso (500 M€, 400 fournisseurs). Il a mené une usine de 500 000 véhicules par an des derniers rangs des enquêtes qualité à la première place de son segment en Europe.",
+    "trainerName": "Laurent Rousseau",
+    "trainerPhoto": "/laurent-rousseau.jpg",
+    "moduleNote": null
+  },
+  {
+    "id": "iso",
+    "category": "SYSTÈMES DE MANAGEMENT",
+    "title": "ISO 9001 & ISO 14001 – versions 2026",
+    "teaser": "Ce qui change, et ce que cela implique concrètement pour votre organisation.",
+    "duration": "2 × 2 h + 1 h de suivi à J+15",
+    "intro": "Les deux normes évoluent. Comprenez ce qui change vraiment, ce que chaque exigence implique sur le terrain, et repartez avec votre plan de mise à jour.",
+    "audience": "directions, responsables QSE, pilotes de processus, auditeurs internes. Les deux modules peuvent se suivre séparément.",
+    "objectives": [
+      "distinguer ce qui reste de la version 2015 et ce qui est nouveau en 2026",
+      "traduire chaque nouveauté en pratiques concrètes pour votre organisation",
+      "identifier les écarts de votre système actuel",
+      "bâtir un plan de mise à jour priorisé et daté"
+    ],
+    "method": null,
+    "schedule": [
+      {
+        "time": "9h00–11h00",
+        "title": "Module 1 – ISO 9001 version 2026",
+        "description": ""
+      },
+      {
+        "time": "9h00",
+        "title": "L'essentiel qui ne change pas",
+        "description": "Rappels de la version 2015 : contexte, approche processus, risques et opportunités."
+      },
+      {
+        "time": "9h30",
+        "title": "Ce qui change",
+        "description": "Les nouveautés 2026 expliquées exigence par exigence, avec des exemples terrain."
+      },
+      {
+        "time": "10h15",
+        "title": "Autodiagnostic",
+        "description": "Chacun repère les écarts de son propre système. Quiz corrigé."
+      },
+      {
+        "time": "10h45",
+        "title": "Votre plan",
+        "description": "Priorités, responsables, calendrier de mise à jour."
+      },
+      {
+        "time": "13h30–15h30",
+        "title": "Module 2 – ISO 14001 version 2026",
+        "description": ""
+      },
+      {
+        "time": "13h30",
+        "title": "L'essentiel qui ne change pas",
+        "description": "Rappels de la version 2015 : aspects environnementaux, obligations de conformité, cycle de vie."
+      },
+      {
+        "time": "14h00",
+        "title": "Ce qui change",
+        "description": "Les évolutions environnementales et l'amendement climat, traduits en pratiques de site."
+      },
+      {
+        "time": "14h45",
+        "title": "Autodiagnostic",
+        "description": "Repérage des écarts sur votre système. Quiz corrigé."
+      },
+      {
+        "time": "15h15",
+        "title": "Votre plan",
+        "description": "Priorités et calendrier, articulés avec le plan ISO 9001."
+      }
+    ],
+    "programmeNote": "Les exemples et exercices s'adaptent au public : direction, pilotes de processus, équipes QSE ou auditeurs.",
+    "followUp": "questions d'interprétation, avancement des plans, points bloquants.",
+    "followUpDate": null,
+    "takeaways": "le support commenté, un tableau de correspondance 2015 → 2026, la grille d'autodiagnostic, votre plan de mise à jour.",
+    "session": "20 novembre 2026",
+    "hours": "9h00–11h00 (ISO 9001) · 13h30–15h30 (ISO 14001)",
+    "format": "À distance",
+    "group": "6 à 12 participants prévus, effectif à confirmer",
+    "languages": "Français ; espagnol et anglais sur demande",
+    "price": "Sur demande, par module ou pour les deux",
+    "trainer": "Votre formatrice : Delphine Bessot, 25 ans de QSE en entreprise et en conseil. Auditrice de certification pour AFNOR Certification, en France et à l'international, responsable d'audit certifiée ICA QSE.",
+    "trainerName": "Delphine Bessot",
+    "trainerPhoto": "/delphine-bessot.jpg",
+    "moduleNote": "Les deux modules peuvent se suivre séparément."
+  }
+]
