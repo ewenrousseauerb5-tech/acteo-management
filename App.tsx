@@ -30,54 +30,6 @@ const formsEndpoint = 'https://vgdwofduvgawzkhannld.supabase.co/functions/v1/act
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-const formations = [
-  {
-    eyebrow: 'Leadership',
-    title: 'De manager à leader coach',
-    description: 'Poser un cadre clair, responsabiliser, donner du feedback et mettre ses collaborateurs en action.',
-    icon: BrainCircuit,
-    duration: '1 jour + 1 h de retour d’expérience à J+15',
-    nextDate: '20 novembre 2026',
-    time: '8h30–12h30 · 13h30–16h30',
-  },
-  {
-    eyebrow: 'Communication',
-    title: 'Adapter sa communication à chaque profil',
-    description: 'Quatre styles comportementaux pour ajuster son rythme, ses mots et son approche avec plus d’impact.',
-    icon: MessageSquareQuote,
-    duration: '2 h + 1 h de retour d’expérience à J+15',
-    nextDate: '23 octobre 2026',
-    time: '9h00–11h00',
-  },
-  {
-    eyebrow: 'Organisation',
-    title: 'Faire avancer sans lien hiérarchique',
-    description: 'Projet, processus ou organisation matricielle : mobiliser, clarifier les responsabilités et obtenir des engagements.',
-    icon: UsersRound,
-    duration: '1 jour + 1 h de retour d’expérience à J+15',
-    nextDate: '30 octobre 2026',
-    time: '8h30–12h30 · 13h30–16h30',
-  },
-  {
-    eyebrow: 'Efficacité',
-    title: 'Résoudre durablement les problèmes',
-    description: 'Identifier les causes racines, construire les bonnes actions et éviter la récidive avec des outils éprouvés.',
-    icon: Gauge,
-    duration: '1 jour + 1 h de retour d’expérience à J+15',
-    nextDate: '6 novembre 2026',
-    time: '8h30–12h30 · 13h30–16h30',
-  },
-  {
-    eyebrow: 'Systèmes de management',
-    title: 'ISO 9001 & ISO 14001 – versions 2026',
-    description: 'Comprendre, anticiper et traduire les évolutions en actions concrètes pour votre organisation.',
-    icon: ClipboardCheck,
-    duration: '2 × 2 h + 1 h de retour d’expérience à J+15',
-    nextDate: '20 novembre 2026',
-    time: '9h00–11h00 · 13h30–15h30',
-  },
-];
-
 const differences = [
   {
     icon: BriefcaseBusiness,
@@ -145,7 +97,6 @@ function App() {
   const [newsletterStatus, setNewsletterStatus] = useState<FormStatus>('idle');
   const [courseStep, setCourseStep] = useState(0);
   const [activeReview, setActiveReview] = useState(0);
-  const [activeFormation, setActiveFormation] = useState<number | null>(null);
   useEffect(() => {
     if (!newsletterOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -325,54 +276,8 @@ function App() {
             <h2>Cinq formations pour faire avancer votre organisation.</h2>
           </div>
 
-          <div className="services-grid">
-            {formations.map((formation, index) => {
-              const isExpanded = activeFormation === index;
-
-              return (
-                <article className={`service-card ${isExpanded ? 'is-expanded' : ''}`} key={formation.title}>
-                  <button
-                    type="button"
-                    className="service-summary"
-                    aria-expanded={isExpanded}
-                    aria-controls={`formation-detail-${index}`}
-                    onClick={() => setActiveFormation(isExpanded ? null : index)}
-                  >
-                    <span className="service-icon">
-                      <formation.icon aria-hidden="true" size={22} />
-                    </span>
-                    <span className="service-summary-copy">
-                      <span className="service-eyebrow">{formation.eyebrow}</span>
-                      <span className="service-title">{formation.title}</span>
-                    </span>
-                    <ChevronRight className="service-toggle" aria-hidden="true" size={20} />
-                  </button>
-                  <div
-                    className="service-detail"
-                    id={`formation-detail-${index}`}
-                    aria-hidden={!isExpanded}
-                  >
-                    <div className="service-detail-inner">
-                      <p>{formation.description}</p>
-                      <div className="service-meta">
-                        <strong>{formation.duration}</strong>
-                        <div className="service-date">
-                          <CalendarDays aria-hidden="true" size={17} />
-                          <span>
-                            <b>Prochaine session</b>
-                            {formation.nextDate} · {formation.time}
-                          </span>
-                        </div>
-                      </div>
-                      <a href="#contact" className="service-link">
-                        Échanger sur cette formation
-                        <ArrowUpRight aria-hidden="true" size={16} />
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+          <div className="services-grid" aria-busy="true">
+            <p className="programme-loading">Chargement des programmes…</p>
           </div>
           <p className="session-note">
             Nous privilégions les petits groupes pour favoriser les échanges et la mise en
