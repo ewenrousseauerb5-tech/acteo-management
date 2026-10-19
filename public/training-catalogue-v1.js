@@ -1,5 +1,5 @@
 const catalogueUrl = new URL('./programmes-formations.json', import.meta.url);
-catalogueUrl.searchParams.set('v', '20261018-final-dates');
+catalogueUrl.searchParams.set('v', '20261019-j14');
 const svg = (name) => {
   const paths = {
     leadership: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
@@ -110,7 +110,7 @@ function openProgramme(course, opener) {
   const programme = section('Le programme, étape par étape', timeline);
   if (course.programmeNote) programme.append(el('p', 'programme-note', course.programmeNote));
   body.append(programme);
-  const followup = section('Le suivi à J+15', el('p', '', course.followUp));
+  const followup = section('Le suivi à J+14', el('p', '', course.followUp));
   followup.classList.add('programme-followup');
   followup.append(el('p', 'programme-note', '1 heure en visioconférence' + (course.followUpDate ? ` · ${course.followUpDate}` : '')));
   body.append(followup, section('Ce que vous emportez', el('p', '', course.takeaways)));

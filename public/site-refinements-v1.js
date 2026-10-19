@@ -1,8 +1,8 @@
 const steps = [
   ['Comprendre', 'Concepts · méthodes · situations réelles', 'J0', 'Acquérir les concepts, les méthodes et les outils à partir de vos situations réelles.'],
-  ['Appliquer', 'Outils · expérimentation terrain', 'J+1 à J+14', 'Expérimenter les outils sur le terrain et mettre votre plan d’action en pratique.'],
-  ['Ancrer', 'Réunion de suivi à J+15', 'J+15 · Réunion de suivi', 'Une réunion à 15 jours pour partager vos retours d’expérience, lever les blocages et consolider les acquis.'],
-  ['Optimiser', 'Retours · ajustements · progrès', 'Après J+15', 'Ajuster vos pratiques à partir des retours terrain et poursuivre les progrès dans la durée.'],
+  ['Appliquer', 'Outils · expérimentation terrain', 'J+1 à J+13', 'Expérimenter les outils sur le terrain et mettre votre plan d’action en pratique.'],
+  ['Ancrer', 'Réunion de suivi à J+14', 'J+14 · Réunion de suivi', 'Une réunion à 14 jours pour partager vos retours d’expérience, lever les blocages et consolider les acquis.'],
+  ['Optimiser', 'Retours · ajustements · progrès', 'Après J+14', 'Ajuster vos pratiques à partir des retours terrain et poursuivre les progrès dans la durée.'],
 ];
 function updateOriginalMethod() {
   const course = document.getElementById('courses');
@@ -11,7 +11,7 @@ function updateOriginalMethod() {
   const list = course.querySelector('.course-list');
   if (!timeline || !list) return;
   course.dataset.methodRefined = 'true';
-  timeline.setAttribute('aria-label', 'Méthode Acteo : comprendre, appliquer, ancrer à J+15 et optimiser');
+  timeline.setAttribute('aria-label', 'Méthode Acteo : comprendre, appliquer, ancrer à J+14 et optimiser');
   timeline.querySelectorAll('.motion-step').forEach((node, index) => {
     if (!steps[index]) return;
     node.querySelector('strong').textContent = steps[index][0];
@@ -33,5 +33,25 @@ function updateOriginalMethod() {
   closing.textContent = 'Comprendre → Appliquer → Ancrer → Optimiser';
   list.replaceChildren(...cards, closing);
 }
-updateOriginalMethod();
-new MutationObserver(updateOriginalMethod).observe(document.documentElement, { childList: true, subtree: true });
+function normalizePublishedCopy() {
+  const root = document.querySelector('main');
+  if (!root) return;
+  const normalize = text => text.replaceAll('J+15', 'J+14').replaceAll('15 jours', '14 jours').replaceAll('J+1 à J+14', 'J+1 à J+13').replaceAll('versions 2026', 'Version 2026');
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    const text = normalize(node.nodeValue);
+    if (text !== node.nodeValue) node.nodeValue = text;
+  }
+  root.querySelectorAll('[aria-label]').forEach(node => {
+    const current = node.getAttribute('aria-label');
+    const next = normalize(current);
+    if (next !== current) node.setAttribute('aria-label', next);
+  });
+}
+function reconcileCopy() {
+  updateOriginalMethod();
+  normalizePublishedCopy();
+}
+reconcileCopy();
+new MutationObserver(reconcileCopy).observe(document.documentElement, { childList: true, subtree: true });

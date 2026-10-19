@@ -4,7 +4,7 @@
     "category": "LEADERSHIP",
     "title": "De manager à leader coach",
     "teaser": "Poser un cadre, responsabiliser et mettre ses collaborateurs en action.",
-    "duration": "1 jour + 1 h de suivi à J+15",
+    "duration": "1 jour + 1 h de suivi à J+14",
     "intro": "Arrêtez de donner toutes les réponses. Posez un cadre clair, faites grandir vos collaborateurs et mettez-les en action.",
     "audience": "managers récemment promus, encadrants de proximité, chefs de projet qui animent une équipe.",
     "objectives": [
@@ -81,7 +81,7 @@
     "category": "COMMUNICATION",
     "title": "Adapter sa communication à chaque profil",
     "teaser": "Quatre styles comportementaux pour parler à chacun avec plus d'impact.",
-    "duration": "2 h + 1 h de suivi à J+15",
+    "duration": "2 h + 1 h de suivi à J+14",
     "intro": "Le même message ne passe pas de la même façon chez tout le monde. Apprenez à repérer le style de votre interlocuteur et à lui parler dans sa langue.",
     "audience": "managers, chefs de projet, commerciaux, fonctions support, toute personne qui doit convaincre ou faire adhérer.",
     "objectives": [
@@ -143,7 +143,7 @@
     "category": "ORGANISATION",
     "title": "Faire avancer sans lien hiérarchique",
     "teaser": "Mobiliser et obtenir des engagements en projet, en processus ou en matriciel.",
-    "duration": "1 jour + 1 h de suivi à J+15",
+    "duration": "1 jour + 1 h de suivi à J+14",
     "intro": "Vous devez obtenir des résultats de personnes qui ne dépendent pas de vous. Clarifiez les rôles, mobilisez et obtenez des engagements tenus.",
     "audience": "chefs de projet, pilotes de processus, managers en organisation matricielle, fonctions support (qualité, RH, finance, achats).",
     "objectives": [
@@ -221,7 +221,7 @@
     "category": "EFFICACITÉ",
     "title": "Résoudre durablement les problèmes",
     "teaser": "Trouver la vraie cause, agir juste, éviter la récidive.",
-    "duration": "1 jour + 1 h de suivi à J+15",
+    "duration": "1 jour + 1 h de suivi à J+14",
     "intro": "Le même problème revient ? C'est qu'on a traité le symptôme. Une méthode en six étapes, éprouvée sur plus de 10 000 problèmes résolus, pour trouver la vraie cause et ne plus y revenir.",
     "audience": "managers, chefs de projet, responsables qualité et production, équipes support. Toute personne qui traite des dysfonctionnements récurrents.",
     "objectives": [
@@ -302,9 +302,9 @@
   {
     "id": "iso",
     "category": "SYSTÈMES DE MANAGEMENT",
-    "title": "ISO 9001 & ISO 14001 – versions 2026",
+    "title": "ISO 9001 & ISO 14001 – Version 2026",
     "teaser": "Ce qui change, et ce que cela implique concrètement pour votre organisation.",
-    "duration": "2 × 2 h + 1 h de suivi à J+15",
+    "duration": "2 × 2 h + 1 h de suivi à J+14",
     "intro": "Les deux normes évoluent. Comprenez ce qui change vraiment, ce que chaque exigence implique sur le terrain, et repartez avec votre plan de mise à jour.",
     "audience": "directions, responsables QSE, pilotes de processus, auditeurs internes. Les deux modules peuvent se suivre séparément.",
     "objectives": [

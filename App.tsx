@@ -42,7 +42,7 @@ const differences = [
   },
   {
     icon: GraduationCap,
-    title: 'Un rendez-vous à J+15',
+    title: 'Un rendez-vous à J+14',
     text: 'Une heure pour partager les retours d’expérience, lever les blocages et ajuster la mise en œuvre.',
   },
   {
@@ -228,7 +228,7 @@ function App() {
                 <strong>On apprend. On applique. On échange. On progresse.</strong>
                 <span>
                   Chaque formation associe apport méthodologique, exemples concrets, mise en
-                  pratique et suivi 15 jours plus tard sur vos situations réelles.
+                  pratique et suivi 14 jours plus tard sur vos situations réelles.
                 </span>
               </div>
               <div className="hero-actions">
@@ -288,8 +288,8 @@ function App() {
         <section id="courses" className="section-block course-band">
           <div className="course-intro">
             <span className="section-kicker">Comment ça marche</span>
-            <h2>Quelques heures pour comprendre. 15 jours pour expérimenter.</h2>
-            <div className="course-motion" aria-label="Méthode Acteo : comprendre, appliquer, ancrer à J+15 et optimiser">
+            <h2>Quelques heures pour comprendre. 14 jours pour expérimenter.</h2>
+            <div className="course-motion" aria-label="Méthode Acteo : comprendre, appliquer, ancrer à J+14 et optimiser">
               <div className="motion-heading">
                 <span>Méthode Acteo</span>
                 <strong>De la complexité à l’action</strong>
@@ -301,7 +301,7 @@ function App() {
                 {[
                   ['01', 'Comprendre', 'Concepts · méthodes · situations réelles'],
                   ['02', 'Appliquer', 'Outils · expérimentation terrain'],
-                  ['03', 'Ancrer', 'Réunion de suivi à J+15'],
+                  ['03', 'Ancrer', 'Réunion de suivi à J+14'],
                   ['04', 'Optimiser', 'Retours · ajustements · progrès'],
                 ].map(([number, title, detail], index) => (
                   <div className={`motion-step ${courseStep === index ? 'is-active' : ''}`} key={number}>
@@ -324,19 +324,19 @@ function App() {
             </div>
             <div>
               <Target aria-hidden="true" />
-              <span className="course-date">J+1 à J+14</span>
+              <span className="course-date">J+1 à J+13</span>
               <h3>Appliquer</h3>
               <p>Expérimenter les outils sur le terrain et mettre votre plan d’action en pratique.</p>
             </div>
             <div>
               <UsersRound aria-hidden="true" />
-              <span className="course-date">J+15 · Réunion de suivi</span>
+              <span className="course-date">J+14 · Réunion de suivi</span>
               <h3>Ancrer</h3>
-              <p>Une réunion à 15 jours pour partager vos retours d’expérience, lever les blocages et consolider les acquis.</p>
+              <p>Une réunion à 14 jours pour partager vos retours d’expérience, lever les blocages et consolider les acquis.</p>
             </div>
             <div>
               <ClipboardCheck aria-hidden="true" />
-              <span className="course-date">Après J+15</span>
+              <span className="course-date">Après J+14</span>
               <h3>Optimiser</h3>
               <p>Ajuster vos pratiques à partir des retours terrain et poursuivre les progrès dans la durée.</p>
             </div>
@@ -458,7 +458,7 @@ function App() {
         <section className="belief-band" aria-label="La promesse Acteo">
           <p>Une formation ne devrait pas se terminer par « Merci, au revoir ».</p>
           <h2>Chez Acteo, la formation se termine quand vous avez commencé à l’utiliser.</h2>
-          <span>Formation → application terrain → retour d’expérience à J+15</span>
+          <span>Formation → application terrain → retour d’expérience à J+14</span>
         </section>
 
         <section id="contact" className="section-block contact-block">
